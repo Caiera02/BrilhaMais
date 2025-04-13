@@ -81,4 +81,6 @@ form {
 
 input {
     padding: 5px;
+    border: #ccc;
+    border-radius: 8px;
 }
