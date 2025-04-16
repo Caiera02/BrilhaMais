@@ -11,3 +11,6 @@ class Representantes(models.Model):
     inativo=models.BooleanField(verbose_name= 'INATIVO')
     data_criacao= models.DateField(auto_now_add=True,verbose_name= 'Data do cadastro')
 
+    class Meta:
+        verbose_name = 'Consultora'
+

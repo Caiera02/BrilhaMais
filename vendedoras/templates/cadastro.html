@@ -1,0 +1,37 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulário</title>
+  <link rel="stylesheet" href="{% static "style.css" %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Formulário - Pessoa 1</h1>
+    <form>
+      <label for="nome1">Nome:</label>
+      <input type="text" id="nome1" name="nome1" required>
+
+      <label for="rg1">RG:</label>
+      <input type="text" id="rg1" name="rg1">
+
+      <label for="cpf1">CPF:</label>
+      <input type="text" id="cpf1" name="cpf1">
+
+      <label for="telefone1">Telefone:</label>
+      <input type="tel" id="telefone1" name="telefone1">
+
+      <label for="telefone2_1">Telefone 2:</label>
+      <input type="tel" id="telefone2_1" name="telefone2_1">
+
+      <label for="instagram1">Instagram:</label>
+      <input type="text" id="instagram1" name="instagram1">
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</body>
+</html>
