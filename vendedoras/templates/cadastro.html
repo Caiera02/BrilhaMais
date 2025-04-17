@@ -9,7 +9,6 @@
   </head>
 
   <body>
-
     <div class="container">
       <h1>Cadastro Consultora</h1>
       <form method="post">
@@ -18,42 +17,36 @@
         {{ new_form.nome }}
 
         <label for="rg">RG:</label>
-       {{ new_form.rg }}
+        {{ new_form.rg }}
 
         <label for="cpf">CPF:</label>
-        {{ new_form.cpf}}
+        {{ new_form.cpf }}
 
         <label for="telefone1">Telefone:</label>
-        {{ new_form.telefone}}
+        {{ new_form.telefone }}
 
         <label for="telefone2">Telefone 2:</label>
-        {{ new_form.telefone_2}}
+        {{ new_form.telefone_2 }}
 
         <label for="instagram1">Instagram:</label>
-        {{ new_form.instagram}}
+        {{ new_form.instagram }}
 
-        <label for="Cep">CEP</label>
-        {{new_form.cep}}
-        {% comment %} <input type="text" id="cep" onchange="BuscaCep()" name="cep"> {% endcomment %}
+        <label for="id_cep">CEP</label>
+        {{ new_form.cep }}
 
-        <label for="">Rua</label>
-        {{new_form.rua}}
-        {% comment %} <input type="text" id="logradouro" name="rua"> {% endcomment %}
-        
-        <label for="">Bairro</label>
-        {{new_form.bairro}}
-        {% comment %} <input type="text" id="bairro" name="bairro"> {% endcomment %}
+        <label for="rua">Rua</label>
+        {{ new_form.rua }}
 
-        <label for="">numero</label>
-        {{new_form.numero}}
-        {% comment %} <input type="text" id="numero" name="numero" > {% endcomment %}
+        <label for="bairro">Bairro</label>
+        {{ new_form.bairro }}
 
-        <label for="">Cidade</label>
-        {{new_form.cidade}}
-        {% comment %} <input type="text" id="estado" name="cidade"> {% endcomment %}
+        <label for="numero">Número</label>
+        {{ new_form.numero }}
 
-        <input type="submit" value="Cadastrar" class="btn btn-primary" >
+        <label for="cidade">Cidade</label>
+        {{ new_form.cidade }}
 
+        <button type="submit" onclick="Salvar()" value="Cadastrar"> Cadastrar</button>
       </form>
     </div>
     <script src="{% static 'Js/cadastro.js' %}"></script>

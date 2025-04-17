@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from vendedoras.forms import RepresentantesModelForm
 # Create your views here.
 
+@login_required(login_url='/admin/')
 def cadastro_view(request):
     if request.method =='POST':
         new_form= RepresentantesModelForm(request.POST)

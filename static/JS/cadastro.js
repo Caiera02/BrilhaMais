@@ -1,8 +1,8 @@
 async function BuscaCep() {
 
-    let cep1= document.getElementById('cep').value
+    let cep1 = document.getElementById('cep').value
     // let url = `https://viacep.com.br/ws/${cep1}/json/`
-    let url = 'https://viacep.com.br/ws/'+ cep1 +'/json/'
+    let url = 'https://viacep.com.br/ws/' + cep1 + '/json/'
 
     await fetch(url).then((response) => {
         // Transforma JSON em OBJ
@@ -17,3 +17,7 @@ async function BuscaCep() {
 
     })
 }
+
+async function Salvar() {
+    alert('Cadastro realizado com sucesso !! \n \n Seja Bem vindo !!');
+} 
