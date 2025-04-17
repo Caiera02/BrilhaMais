@@ -1,37 +1,61 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Formulário</title>
-  <link rel="stylesheet" href="{% static "style.css" %}">
-</head>
-<body>
-  <div class="container">
-    <h1>Formulário - Pessoa 1</h1>
-    <form>
-      <label for="nome1">Nome:</label>
-      <input type="text" id="nome1" name="nome1" required>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulário</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
 
-      <label for="rg1">RG:</label>
-      <input type="text" id="rg1" name="rg1">
+  <body>
 
-      <label for="cpf1">CPF:</label>
-      <input type="text" id="cpf1" name="cpf1">
+    <div class="container">
+      <h1>Cadastro Consultora</h1>
+      <form method="post">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        {{ new_form.nome }}
 
-      <label for="telefone1">Telefone:</label>
-      <input type="tel" id="telefone1" name="telefone1">
+        <label for="rg">RG:</label>
+       {{ new_form.rg }}
 
-      <label for="telefone2_1">Telefone 2:</label>
-      <input type="tel" id="telefone2_1" name="telefone2_1">
+        <label for="cpf">CPF:</label>
+        {{ new_form.cpf}}
 
-      <label for="instagram1">Instagram:</label>
-      <input type="text" id="instagram1" name="instagram1">
+        <label for="telefone1">Telefone:</label>
+        {{ new_form.telefone}}
 
-      <button type="submit">Enviar</button>
-    </form>
-  </div>
-</body>
+        <label for="telefone2">Telefone 2:</label>
+        {{ new_form.telefone_2}}
+
+        <label for="instagram1">Instagram:</label>
+        {{ new_form.instagram}}
+
+        <label for="Cep">CEP</label>
+        {{new_form.cep}}
+        {% comment %} <input type="text" id="cep" onchange="BuscaCep()" name="cep"> {% endcomment %}
+
+        <label for="">Rua</label>
+        {{new_form.rua}}
+        {% comment %} <input type="text" id="logradouro" name="rua"> {% endcomment %}
+        
+        <label for="">Bairro</label>
+        {{new_form.bairro}}
+        {% comment %} <input type="text" id="bairro" name="bairro"> {% endcomment %}
+
+        <label for="">numero</label>
+        {{new_form.numero}}
+        {% comment %} <input type="text" id="numero" name="numero" > {% endcomment %}
+
+        <label for="">Cidade</label>
+        {{new_form.cidade}}
+        {% comment %} <input type="text" id="estado" name="cidade"> {% endcomment %}
+
+        <input type="submit" value="Cadastrar" class="btn btn-primary" >
+
+      </form>
+    </div>
+    <script src="{% static 'Js/cadastro.js' %}"></script>
+  </body>
 </html>

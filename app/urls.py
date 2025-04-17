@@ -19,6 +19,6 @@ from django.urls import path
 from vendedoras.views import cadastro_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('cadastro/',cadastro_view,name='cadastro'),
+    path('admin/', admin.site.urls,name='admin_1'),
+    path('cadastro/',cadastro_view,name='new_cadastro'),
 ]

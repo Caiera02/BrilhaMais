@@ -13,7 +13,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 STATIC_URL = 'static/'
+# Se você tem uma pasta 'static' na raiz do projeto:
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# STATIC_URL = 'static/'
+
+# # Se você tem uma pasta 'static' na raiz do projeto:
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# # Para produção, defina o diretório onde os arquivos serão coletados:
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
