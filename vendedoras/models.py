@@ -16,8 +16,23 @@ class Representantes(models.Model):
     ativo=models.BooleanField(default=True,verbose_name= 'ATIVO')
     inativo=models.BooleanField(verbose_name= 'INATIVO')
 
-
-
     class Meta:
         verbose_name = 'Consultora'
 
+class Maleta(models.Model):
+    nome = models.CharField(max_length=50, unique=True, verbose_name='Maleta')
+    consultora = models.ForeignKey(
+        Representantes, on_delete=models.CASCADE, related_name='itens', verbose_name='Consultora')
+    data_criacao = models.DateField(auto_now_add=True)
+
+class Produtos(models.Model):
+    nome = models.CharField(max_length=20,verbose_name='Peças')
+
+class Produto(models.Model):
+    tipos = models.ForeignKey(Produtos,on_delete=models.CASCADE,related_name='produtos')
+    maleta = models.ForeignKey(
+        Maleta, on_delete=models.CASCADE, related_name='produtos')
+    valor = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.produto} - R$ {self.valor}"
