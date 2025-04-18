@@ -16,17 +16,28 @@ class Representantes(models.Model):
     ativo=models.BooleanField(default=True,verbose_name= 'ATIVO')
     inativo=models.BooleanField(verbose_name= 'INATIVO')
 
+    def __str__(self):
+        return self.nome
     class Meta:
         verbose_name = 'Consultora'
 
 class Maleta(models.Model):
-    nome = models.CharField(max_length=50, unique=True, verbose_name='Maleta')
+    nome = models.CharField(max_length=50, unique=True, verbose_name='Mostruario')
     consultora = models.ForeignKey(
         Representantes, on_delete=models.CASCADE, related_name='itens', verbose_name='Consultora')
     data_criacao = models.DateField(auto_now_add=True)
 
+    def valor_total(self):
+        return self.produtos.aggregate(total=models.Sum('valor'))['total'] or 0
+    
+    class Meta:
+        verbose_name ='Mostruario'
+
 class Produtos(models.Model):
     nome = models.CharField(max_length=20,verbose_name='Peças')
+
+    def __str__(self):
+        return self.nome
 
 class Produto(models.Model):
     tipos = models.ForeignKey(Produtos,on_delete=models.CASCADE,related_name='produtos')
@@ -35,4 +46,4 @@ class Produto(models.Model):
     valor = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return f"{self.produto} - R$ {self.valor}"
+        return f"{self.tipos} - R$ {self.valor}"
