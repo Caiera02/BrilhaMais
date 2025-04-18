@@ -11,7 +11,7 @@ class Cliente (models.Model):
 
 class Vendas (models.Model):
     nome =models.ForeignKey(Cliente,on_delete=models.CASCADE, related_name='clinte', verbose_name='Cliente')
-    produto = models.ForeignKey(Produtos,on_delete=models.CASCADE, related_name='clinte', verbose_name='Peças')
+    produto = models.ForeignKey(Produtos,on_delete=models.CASCADE, related_name='clinte',verbose_name='Peças')
     valor = models.DecimalField(max_digits=8, decimal_places=2)
     pago = models.BooleanField()
     n_pago = models.BooleanField()
@@ -19,5 +19,4 @@ class Vendas (models.Model):
     data_atualizacao = models.DateField(auto_now=True,verbose_name='Atulização')
 
     def __str__(self):
-        return self.nome
- 
+        return str(self.nome)
