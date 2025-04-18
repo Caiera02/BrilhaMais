@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Representantes,Produtos,Produto,Maleta
+from vendedoras.models import Representantes,Produtos,Produto,Maleta
 
 @admin.register(Representantes)
 class RepresentantesAdmin(admin.ModelAdmin):
