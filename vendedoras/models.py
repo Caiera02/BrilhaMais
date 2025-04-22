@@ -28,7 +28,7 @@ class Maleta(models.Model):
     nome = models.CharField(max_length=50, unique=True, verbose_name='Mostruario')
     consultora = models.ForeignKey(
         Representantes, on_delete=models.CASCADE, related_name='itens', verbose_name='Consultora')
-    data_criacao = models.DateField(auto_now_add=True,verbose_name= 'Criado em')
+    data_criacao = models.DateField(auto_now_add=True,verbose_name= 'Data de Saida')
     atualizacao = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
 
     def __str__(self):
