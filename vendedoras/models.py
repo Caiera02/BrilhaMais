@@ -49,10 +49,10 @@ class Maleta(models.Model):
         total = self.valor_total()
         
         if total >=1000:
-            porcentagem = Decimal('0.05')
-        elif total >=2000:
-            porcentagem = Decimal('0.10')
-        elif total >=3000:
+            porcentagem = Decimal('0.40')
+        elif total >=500:
+            porcentagem = Decimal('0.30')
+        elif total <=499:
             porcentagem= Decimal('0.20')
         else:
             porcentagem = Decimal('0.00')#sem comissão
