@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from vendedoras.views import cadastro_view, maleta_view
+from contabilidade.views import salvar_vendas
 
 urlpatterns = [
     path('admin/', admin.site.urls,name='admin_1'),
     path('cadastro/',cadastro_view,name='new_cadastro'),
     path('maleta/',maleta_view,name='produto_list'),
+    path('salvar_vendas/',maleta_view,name='vendas_list'),
 ]
