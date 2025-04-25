@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
-from vendedoras.models import Maleta, Produtos
+from vendedoras.models import Maleta, Produto
 from contabilidade.models import Venda
 
 def salvar_vendas(request):
@@ -10,7 +10,7 @@ def salvar_vendas(request):
         print(produto_ids)
 
         maleta = get_object_or_404(Maleta, id=maleta_id)
-        produtos = Produtos.objects.filter(id__in=produto_ids)
+        produtos = Produto.objects.filter(id__in=produto_ids)
 
         for produto in produtos:
             Venda.objects.create(
