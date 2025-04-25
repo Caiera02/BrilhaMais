@@ -1,15 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect
+from vendedoras.models import Maleta, Produto
+from contabilidade.models import Venda
 
 def salvar_vendas(request):
-    if request.method == "POST":
-        selecionados_ids = request.POST.getlist("selecionados")
-        itens = Item.objects.filter(id__in=selecionados_ids)
+    if request.method == 'POST':
+        maleta_id = request.POST.get('maleta_id')
+        produto_ids = request.POST.getlist('produtos_selecionados')
 
-        for item in itens:
+        maleta = get_object_or_404(Maleta, id=maleta_id)
+        produtos = Produto.objects.filter(id__in=produto_ids)
+
+        for produto in produtos:
             Venda.objects.create(
-                tipo=item.tipo,
-                valor=item.valor,
-                origem=item  # se quiser manter referência ao item original
+                maleta=maleta,
+                produto=produto,
+                valor=produto.valor
             )
+
         return redirect('pagina_de_sucesso')
     
