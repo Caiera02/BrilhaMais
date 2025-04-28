@@ -14,7 +14,9 @@ class ClienteAdmin(admin.ModelAdmin):
 @admin.register(Vendas)
 class VendasAdmin(admin.ModelAdmin):
     # inlines = [ProdutoInline]
-    list_display= ['nome','valor','pago','n_pago','data_compra']
+    list_display= ['nome','valor','pago','n_pago','data_compra','data_atualizacao']
+    
+    
 
     
 

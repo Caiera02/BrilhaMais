@@ -15,8 +15,5 @@ class Vendas (models.Model):
     valor = models.DecimalField(max_digits=8, decimal_places=2)
     pago = models.BooleanField()
     n_pago = models.BooleanField()
-    data_compra = models.DateField(auto_now_add=True,verbose_name='Compra')
-    data_atualizacao = models.DateField(auto_now=True,verbose_name='Atulização')
-
-    def __str__(self):
-        return str(self.nome)
+    data_compra = models.DateField(auto_now_add=True,verbose_name='Comprado em ')
+    data_atualizacao = models.DateField(auto_now=True,verbose_name='Atulizado em ')
