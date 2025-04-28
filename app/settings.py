@@ -10,6 +10,15 @@ SECRET_KEY = 'django-insecure-wr^2vove3uy(!6ly7r!zall8r=&a^r3masb1xcr-uxh7h9kg5^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Tempo máximo de inatividade (em segundos)
+SESSION_COOKIE_AGE = 300  # 05 minutos
+
+# A sessão é renovada a cada requisição ativa
+SESSION_SAVE_EVERY_REQUEST = True
+
+# A sessão é destruída ao fechar o navegador (opcional, mas recomendado)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 ALLOWED_HOSTS = []
 
 STATIC_URL = 'static/'
