@@ -14,7 +14,16 @@ class ClienteAdmin(admin.ModelAdmin):
 @admin.register(Vendas)
 class VendasAdmin(admin.ModelAdmin):
     # inlines = [ProdutoInline]
-    list_display= ['nome','valor','pago','n_pago','data_compra','data_atualizacao']
+    list_display= ['nome','valor_formatado','pago','n_pago','data_compra_formatada','data_atualizacao',]
+    list_filter = ['pago','n_pago']
+    exclude = ['nome',]
+    
+    def valor_formatado(self,obj):
+        return f'R$ {obj.valor}'
+    
+    def data_compra_formatada(self, obj):
+        return obj.data_compra.strftime('%d/%m/%Y')
+    data_compra_formatada.short_description = 'Comprado em'
     
     
 
