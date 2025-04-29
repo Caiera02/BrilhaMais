@@ -1,4 +1,6 @@
 {% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -8,7 +10,21 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
 
-  <body>
+  <body> 
+    
+     <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
+    margin-left: 0px;
+    margin-top: 0px;
+">☰ Menu</button> 
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <button class="close-toggle" onclick="toggleSidebar()">✖</button>
+      <button>Maleta</button>
+      <button>Cadastro</button>
+      <button>Admin</button>
+    </aside>
+
     <div class="container">
       <h1>Cadastro Consultora</h1>
       <form method="post">
@@ -32,23 +48,25 @@
         {{ new_form.instagram }}
 
         <label for="id_cep">CEP</label>
-        {{ new_form.cep }}
+        <input type="text" name="cep" id="cep" onchange="BuscaCep()" value="{{ new_form.cep.value|default_if_none:'' }}" placeholder="Digite o CEP">
 
         <label for="rua">Rua</label>
-        {{ new_form.rua }}
+        <input type="text" name="rua" id="logradouro" value="{{ new_form.rua.value|default_if_none:'' }}" readonly>
 
         <label for="bairro">Bairro</label>
-        {{ new_form.bairro }}
+        <input type="text" name="bairro" id="bairro" value="{{ new_form.bairro.value|default_if_none:'' }}" readonly>
 
         <label for="numero">Número</label>
-        {{ new_form.numero }}
-
+        {{new_form.numero}}
+ 
         <label for="cidade">Cidade</label>
-        {{ new_form.cidade }}
+        <input type="text" name="cidade" id="localidade" value="{{ new_form.cidade.value|default_if_none:'' }}">
 
         <button type="submit" onclick="Salvar()" value="Cadastrar"> Cadastrar</button>
       </form>
     </div>
     <script src="{% static 'Js/cadastro.js' %}"></script>
+    <script src="{% static 'Js/home.js' %}"></script>
   </body>
 </html>
+{% endblock  %}

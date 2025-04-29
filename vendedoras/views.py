@@ -29,3 +29,6 @@ def maleta_view(request):
     return render(request,
                   'romaneio.html',
                   {'maleta':maleta})
+
+def home_view(request):
+    return render(request,'home.html')
