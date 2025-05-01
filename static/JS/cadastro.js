@@ -20,4 +20,4 @@ async function BuscaCep() {
 
 async function Salvar() {
     alert('Cadastro realizado com sucesso !! \n \n Seja Bem vindo !!');
-} 
+}

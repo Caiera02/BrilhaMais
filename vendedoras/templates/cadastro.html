@@ -37,7 +37,8 @@
           {{ new_form.rg }}
 
           <label for="cpf">CPF:</label>
-          {{ new_form.cpf }}
+          <input type="text" name="cpf" id="cpf" onchange="validarCPF()" value="{{ new_form.cpf.value|default_if_none:'' }}" placeholder="Digite o CPF" />
+          {% comment %} {{ new_form.cpf }} {% endcomment %}
 
           <label for="telefone1">Telefone:</label>
           {{ new_form.telefone }}
