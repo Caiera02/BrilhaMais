@@ -3,9 +3,9 @@ from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from vendedoras.forms import RepresentantesModelForm
 from vendedoras.models import Maleta
-# Create your views here.
 
-@login_required(login_url='/admin/')
+
+# @login_required(login_url='/admin/')
 def cadastro_view(request):
     if request.method =='POST':
         new_form= RepresentantesModelForm(request.POST)
@@ -20,7 +20,8 @@ def cadastro_view(request):
     'cadastro.html',
     {'new_form': new_form}
 )
-    
+
+@login_required(login_url='/admin/')
 def maleta_view(request):
     maletas=Maleta.objects.all()
     paginator =Paginator(maletas,1)
@@ -29,6 +30,7 @@ def maleta_view(request):
     return render(request,
                   'romaneio.html',
                   {'maleta':maleta})
-
+    
+@login_required(login_url='/admin/')
 def home_view(request):
     return render(request,'home.html')
