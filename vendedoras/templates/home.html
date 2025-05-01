@@ -1,38 +1,35 @@
-
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=" {%static 'css/home.css'%} ">
-    <title>Document</title>
-</head>
-<body>
-    <!-- Botão para mostrar a sidebar no desktop -->
-<button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href=" {% static 'css/home.css' %} " />
+      <title>Document</title>
+    </head>
+    <body>
+        <!-- Botão para mostrar a sidebar no desktop -->
+      <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-    <button>Maleta</button>
-    <button>Cadastro</button>
-    <button>Admin</button>
-</aside> 
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <button>Maleta</button>
+        <button>Cadastro</button>
+        <button>Admin</button>
+      </aside>
 
-<div class="container">
-    <h1>Bem-vindo à Loja de Semijoias</h1>
-    <div class="buttons">
-        <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
-        <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
-        <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
-    </div>
-</div>
+      <div class="container">
+        <h1>Bem-vindo à Loja de Semijoias</h1>
+            <div class="buttons">
+                <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
+                <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
+                <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
+            </div>
+      </div>
 
-<script src="{% static 'JS/home.js' %}"></script>
-    
-</body>
-</html>
-
+      <script src="{% static 'JS/home.js' %}"></script>
+    </body>
+  </html>
 {% endblock %}

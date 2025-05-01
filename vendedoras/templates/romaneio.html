@@ -1,47 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <title>Lista de Lotes</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      h1,
-      #rep {
-        text-align: center;
-      }
-      h2 {
-        color: #2c3e50;
-        text-align: center;
-      }
-      table {
-        width: 80%;
-        border-collapse: collapse;
-        margin-bottom: 40px;
-        margin-left: 10%;
-      }
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
-      }
-      th {
-        background-color: #f2f2f2;
-      }
-      .paginacao {
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 12px;
-      }
-      .valor {
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/romaneio.css'%}">
   </head>
   <body>
+
+    <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
+        margin-left: 0px;
+        margin-top: 0px;
+        ">☰ Menu</button>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+          <button class="close-toggle" onclick="toggleSidebar()">✖</button>
+          <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
+          <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
+          <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
+        </aside>
+
     <h1>Consultoras</h1>
 
     {% for lote in maleta %}
@@ -64,7 +43,7 @@
           <thead>
             <tr>
               <th></th>
-              <th>Tipo</th>
+              <th>Produto</th>
               <th class="valor">Valor</th>
             </tr>
           </thead>
@@ -105,5 +84,6 @@
         <a href="?page={{ maleta.paginator.num_pages }}">Última</a>
       {% endif %}
     </div> 
+    <script src="{% static 'Js/home.js' %}"></script>
   </body>
 </html>

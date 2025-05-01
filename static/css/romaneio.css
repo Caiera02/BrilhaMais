@@ -1,0 +1,269 @@
+/* --- Geral --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #f8f5ef;
+    color: #333;
+  }
+  
+  /* --- Botão de Menu --- */
+  .menu-toggle {
+    background-color: #d4af37;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 6px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .menu-toggle:hover {
+    background-color: #b89a2e;
+  }
+  
+  /* --- Sidebar --- */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100%;
+    background-color: #d4af37;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar button {
+    background-color: #fff;
+    color: #d4af37;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar button:hover {
+    background-color: #f0e3b2;
+  }
+  
+  .close-toggle {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  /* --- Título e Seções --- */
+  h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+  }
+  
+  h2 {
+    color: #b89a2e;
+    margin-left: 20px;
+  }
+  
+  #rep, strong {
+    margin-left: 20px;
+  }
+  
+  /* --- Tabela --- */
+  table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background: transparent;
+  }
+  
+  thead th {
+    background-color: #d4af37;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 6px 6px 0 0;
+    text-align: left;
+  }
+  
+  tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  tbody tr:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.2);
+    accent-color: #d4af37;
+  }
+  
+  /* --- Botão de Venda --- */
+  button[type="submit"] {
+    margin: 20px;
+    padding: 10px 16px;
+    background-color: #d4af37;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #b89a2e;
+  }
+  
+  /* --- Paginação --- */
+  .paginacao {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+  }
+  
+  .paginacao a {
+    margin: 0 8px;
+    text-decoration: none;
+    color: #b89a2e;
+    font-weight: bold;
+  }
+  
+  .paginacao a:hover {
+    text-decoration: underline;
+  }
+  
+
+
+
+
+
+
+.sidebar {
+    background-color: #d4af37;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.sidebar button {
+    display: block;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: white;
+    color: #d4af37;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+    background-color: #f4e4b3;
+}
+
+/* Button */
+
+.menu-toggle {
+    /* position: fixed; */
+    top: 20px;
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    /* z-index: 1001; */
+}
+
+/* Botão de fechar a sidebar */
+.close-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: #d4af37;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Conteúdo principal */
+.content {
+    margin-left: 200px;
+    padding: 20px;
+    flex: 1;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(0);
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    /* Botão de fechar a sidebar */
+    .close-toggle {
+        display: none;
+    }
+}
+
+/* DESKTOP: sidebar oculta por padrão, aparece ao clicar */
+@media (min-width: 769px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}

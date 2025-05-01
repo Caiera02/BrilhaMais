@@ -11,18 +11,20 @@
     </head>
 
     <body>
-      <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
-    margin-left: 0px;
-    margin-top: 0px;
-">☰ Menu</button>
-
-      <!-- Sidebar -->
-      <aside class="sidebar" id="sidebar">
-        <button class="close-toggle" onclick="toggleSidebar()">✖</button>
-        <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
-        <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
-        <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
-      </aside>
+      {% if user.is_authenticated  %}
+        <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
+        margin-left: 0px;
+        margin-top: 0px;
+        ">☰ Menu</button>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+          <button class="close-toggle" onclick="toggleSidebar()">✖</button>
+          <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
+          <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
+          <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
+        </aside>
+      {% endif %}
 
       <div class="container">
         <h1>Cadastro Consultora</h1>
