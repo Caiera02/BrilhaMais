@@ -20,7 +20,7 @@ h1 {
 
 /* Botões centrais */
 .buttons button {
-    background-color: #d4af37;
+    background-color: #419881;
     color: white;
     border: none;
     padding: 15px 30px;
@@ -56,7 +56,7 @@ h1 {
 
 /* Sidebar */
 .sidebar {
-    background-color: #d4af37;
+    background-color: #419881;
     color: white;
     padding: 20px;
     width: 200px;
@@ -78,7 +78,7 @@ h1 {
     margin: 15px 0;
     padding: 10px;
     background-color: white;
-    color: #d4af37;
+    color: #419881;
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -92,7 +92,7 @@ h1 {
     top: 20px;
     left: 20px;
     z-index: 1000;
-    background-color: #d4af37;
+    background-color: #419881;
     color: white;
     border: none;
     padding: 10px 15px;

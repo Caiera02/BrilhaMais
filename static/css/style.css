@@ -65,7 +65,7 @@ button:hover {
 }
 
 .sidebar {
-  background-color: #d4af37;
+  background-color: #419881;
   color: white;
   padding: 20px;
   width: 200px;
@@ -82,7 +82,7 @@ button:hover {
   margin: 15px 0;
   padding: 10px;
   background-color: white;
-  color: #d4af37;
+  color: #419881;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -99,7 +99,7 @@ button:hover {
 .menu-toggle {
   /* position: fixed; */
   top: 20px;
-  background-color: #d4af37;
+  background-color: #419881;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -115,7 +115,7 @@ button:hover {
   top: 10px;
   right: 10px;
   background-color: white;
-  color: #d4af37;
+  color: #419881;
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
