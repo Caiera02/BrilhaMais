@@ -4,20 +4,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'home.css'%}">
-    {% comment %} <title>Document</title> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Semijoias</title>
   </head>
   <body>
 
-    <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
+    {% if user.is_authenticated  %}
+        <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
+        margin-left: 0px;
+        margin-top: 0px;">☰ Menu</button>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+          {% comment %} <button class="close-toggle" onclick="toggleSidebar()">✖</button> {% endcomment %}
+          <a href="{% url 'produto_list' %}"><button style="margin-top: 30%;">Maleta</button></a>
+          <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
+          <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
+        </aside>
+      {% endif %}
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <button>Maleta</button>
-      <button>Cadastro</button>
-      <button>Admin</button>
-    </aside>
+    <!-- Aqui entra o conteúdo do filho -->
+    {% block content %}
+    {% endblock %}
 
     <script src="{% static 'JS/home.js' %}"></script>
   </body>
 </html>
+
