@@ -21,7 +21,6 @@ def cadastro_view(request):
     {'new_form': new_form}
 )
 
-@login_required(login_url='/admin/')
 # def maleta_view(request):
 #     maletas=Maleta.objects.all()
 #     paginator =Paginator(maletas,1)
@@ -31,6 +30,7 @@ def cadastro_view(request):
 #                   'romaneio.html',
 #                   {'maleta':maleta})
 
+@login_required(login_url='login')
 def maleta_view(request):
     if request.user.is_superuser:# Quem for admin, vai ter direito de visualizar todos os mostruarios, maletas e bag
         maleta = Maleta.objects.all()
@@ -40,16 +40,16 @@ def maleta_view(request):
         
     else:
         try:
+            #aqui cada usuario visualiza seu mostruario
             email_usuario = request.user.email  # E-mail do usuário logado
             representante = Representantes.objects.get(email=email_usuario)
-            maletas = Maleta.objects.filter(consultora=representante)
+            maleta = Maleta.objects.filter(consultora=representante)
         except Representantes.DoesNotExist:
-            maletas = Maleta.objects.none()
-
-            paginator = Paginator(maletas, 1)
+            maleta = Maleta.objects.none()
+            paginator = Paginator(maleta, 1)
             page_number = request.GET.get('page')
             maleta = paginator.get_page(page_number)
-
+            
     return render(request, 'romaneio.html', {'maleta': maleta})
       
 @login_required(login_url='/admin/')
