@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from vendedoras.forms import RepresentantesModelForm
-from vendedoras.models import Maleta
+from vendedoras.models import Maleta,Representantes
 
 
 # @login_required(login_url='/admin/')
@@ -22,14 +22,35 @@ def cadastro_view(request):
 )
 
 @login_required(login_url='/admin/')
+# def maleta_view(request):
+#     maletas=Maleta.objects.all()
+#     paginator =Paginator(maletas,1)
+#     page_number = request.GET.get('page')
+#     maleta = paginator.get_page(page_number)
+#     return render(request,
+#                   'romaneio.html',
+#                   {'maleta':maleta})
+
 def maleta_view(request):
-    maletas=Maleta.objects.all()
-    paginator =Paginator(maletas,1)
-    page_number = request.GET.get('page')
-    maleta = paginator.get_page(page_number)
-    return render(request,
-                  'romaneio.html',
-                  {'maleta':maleta})
+    if request.user.is_superuser:# Quem for admin, vai ter direito de visualizar todos os mostruarios, maletas e bag
+        maleta = Maleta.objects.all()
+        paginator = Paginator(maleta, 1)
+        page_number = request.GET.get('page')
+        maleta = paginator.get_page(page_number)
+        
+    else:
+        try:
+            email_usuario = request.user.email  # E-mail do usuário logado
+            representante = Representantes.objects.get(email=email_usuario)
+            maletas = Maleta.objects.filter(consultora=representante)
+        except Representantes.DoesNotExist:
+            maletas = Maleta.objects.none()
+
+            paginator = Paginator(maletas, 1)
+            page_number = request.GET.get('page')
+            maleta = paginator.get_page(page_number)
+
+    return render(request, 'romaneio.html', {'maleta': maleta})
       
 @login_required(login_url='/admin/')
 def home_view(request):

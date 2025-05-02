@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login
 from django.shortcuts import render,redirect
 
-# Create your views here.
+
 def registro_view(request):
     if request.method == 'POST':
         user_form = UserCreationForm(request.POST)
@@ -13,7 +13,6 @@ def registro_view(request):
     else:
         user_form=UserCreationForm()      
     return render(request,'registro.html',{'user_form':user_form})
-
 
 def login_view(request):
     if request.method == 'POST':
