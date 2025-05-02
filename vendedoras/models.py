@@ -1,12 +1,12 @@
 from django.db import models
 from decimal import Decimal
 from django.utils.safestring import mark_safe
-from .validators import validar_cpf
 
 class Representantes(models.Model):
     nome = models.CharField(max_length=60)
     rg = models.CharField(max_length=20)
     cpf= models.CharField(max_length=14)
+    email = models.EmailField(unique=True)
     telefone = models.CharField(max_length=20)
     telefone_2 = models.CharField(max_length=20, blank= True, null=True)
     instagram= models.CharField(max_length=30)
