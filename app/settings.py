@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cliente',
     'import_export',
     'contabilidade',
+    'accounts',
 ]
 
 MIDDLEWARE = [
