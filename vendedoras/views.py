@@ -52,6 +52,6 @@ def maleta_view(request):
             
     return render(request, 'romaneio.html', {'maleta': maleta})
       
-@login_required(login_url='/admin/')
+@login_required(login_url='login')
 def home_view(request):
     return render(request,'home.html')
