@@ -1,27 +1,46 @@
 {% load static %}
 {% block content %}
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="{% static 'CSS/login.css' %}" />
-      <title>Login</title>
-    </head>
-    <body>
-      <form method="post">
-        {% csrf_token %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>REGISTER</title>
+  </head>
+  <body>
+    <div class="login-container" >
+      <div class="login-image" >
+        <img src="{% static 'IMG/kadore.png' %}" alt="Login Icon" />
+      </div>
+      <div class="login-form">
 
-        {{login_form.username.erros}}
-        <label for="">Usuario</label>
-        {{ login_form.username }}
+        <h2 style="text-align: center;">Login</h2>
 
-        {{login_form.password.erros}}
-        <label for="">Senha</label>
-        {{ login_form.password }}
+        <form method="post">
+          {% csrf_token %}
 
-        <input type="submit" value="Entrar" />
-      </form>
-    </body>
-  </html>
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <label>Usuario:</label>
+            {{ login_form.username }}
+          </div>
+
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <label> Senha:</label>
+            {{ login_form.password }}
+          </div>
+
+          <input type="submit" value="LOGIN" />
+        </form>
+
+        <a href="#" class="forgot" style="display: none;">Forgot Username / Password?</a>
+        <a href="{% url 'registro' %}" class="create-account"> Creat your Account →</a>
+      </div>
+    </div>
+
+  </body>
+</html>
 {% endblock %}

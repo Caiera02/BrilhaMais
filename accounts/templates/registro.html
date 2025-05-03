@@ -1,35 +1,49 @@
+{% load static %}
 {% block content %}
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-    </head>
-    <body>
-      <form method="post">
-        {% csrf_token %}
-        
-        <div class="form-group">
-          {{user_form.username.erros}}
-            <label>Usuario</label>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/registro.css' %}" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>REGISTER</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-image">
+        <img src="{% static 'IMG/kadore.png' %}" alt="Login Icon" />
+      </div>
+      <div class="login-form">
+        <h2 style="text-align: center;">Cadastra-se</h2>
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <label>Usuario:</label>
             {{ user_form.username }}
-        </div>
-        
-        <div class="form-group">
-          {{user_form.password.erros}}
-            <label>Senha</label>
+          </div>
+
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <label> Senha:</label>
             {{ user_form.password1 }}
-        </div>
+          </div>
 
-        <div class="form-group">
-          {{user_form.password2.erros}}
-            <label>Confirmação de Senha</label>
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <label> Confirmar a Senha:</label>
             {{ user_form.password2 }}
-        </div>
+          </div>
 
-        <input type="submit" value="Cadastrar">
-    </form>
-    </body>
-  </html>
+          <input type="submit" value="CADASTRAR" />
+        </form>
+
+        <a href="#" class="forgot" style="display: none;">Forgot Username / Password?</a>
+        <a href="{% url 'login' %}" class="create-account"> Your Account →</a>
+      </div>
+    </div>
+  </body>
+</html>
 {% endblock %}
