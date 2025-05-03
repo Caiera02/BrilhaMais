@@ -4,23 +4,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>Semijoias</title>
   </head>
   <body>
 
     {% if user.is_authenticated  %}
-        <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
-        margin-left: 0px;
-        margin-top: 0px;">☰ Menu</button>
-        
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-          {% comment %} <button class="close-toggle" onclick="toggleSidebar()">✖</button> {% endcomment %}
-          <a href="{% url 'produto_list' %}"><button style="margin-top: 30%;">Maleta</button></a>
-          <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
-          <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
-        </aside>
+    <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
+    margin-left: 0px;
+    margin-top: 0px;
+    ">☰ Menu</button>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <button class="close-toggle" onclick="toggleSidebar()">✖</button>
+      <a href="{% url 'home_list'%}"><button style="color: #419881;">HOME</button></a>
+      <a href="{% url 'produto_list' %}"><button style="color: #419881;">Maleta</button></a>
+      <a href="{% url 'new_cadastro' %}"><button style="color: #419881;">Cadastro</button></a>
+    </aside>
       {% endif %}
 
     <!-- Aqui entra o conteúdo do filho -->

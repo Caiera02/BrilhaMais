@@ -1,110 +1,116 @@
+/* sidebar */
 .sidebar {
-    background-color: #419881;
-    color: white;
-    padding: 20px;
-    width: 200px;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
+  background-color: #419881;
+  color: white;
+  padding: 20px;
+  width: 200px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  text-transform: uppercase;
+}
+
+.sidebar button {
+  display: block;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: white;
+  color: #419881;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.sidebar button:hover {
+  background-color: #419881;
+}
+
+button{
+  color: #419881;
+}
+/* Button */
+
+.menu-toggle {
+  /* position: fixed; */
+  top: 20px;
+  background-color: #419881;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  /* z-index: 1001; */
+}
+
+/* Botão de fechar a sidebar */
+.close-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  color: #419881;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Conteúdo principal */
+.content {
+  margin-left: 200px;
+  padding: 20px;
+  flex: 1;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(0);
+    position: relative;
+    width: 100%;
+    height: auto;
   }
-  
-  .sidebar button {
-    display: block;
-    margin-top: 50%;
-    margin: 15px 0;
-    padding: 10px;
-    background-color: white;
-    color: #419881;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .sidebar button:hover {
-    background-color: #f4e4b3;
-  }
-  
-  /* Button */
-  
+
   .menu-toggle {
-    /* position: fixed; */
-    top: 20px;
-    background-color: #419881;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    /* z-index: 1001; */
+    display: none;
   }
-  
+
+  .content {
+    margin-left: 0;
+  }
+
   /* Botão de fechar a sidebar */
   .close-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: white;
-    color: #419881;
-    font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 5px;
+    display: none;
   }
-  
-  /* Conteúdo principal */
-  .content {
-    margin-left: 200px;
-    padding: 20px;
-    flex: 1;
+}
+
+/* DESKTOP: sidebar oculta por padrão, aparece ao clicar */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(-100%);
   }
-  
+
   .sidebar.active {
     transform: translateX(0);
   }
-  
-  /* MOBILE */
-  @media (max-width: 768px) {
-    .sidebar {
-      transform: translateX(0);
-      position: relative;
-      width: 100%;
-      height: auto;
-    }
-  
-    .menu-toggle {
-      display: none;
-    }
-  
-    .content {
-      margin-left: 0;
-    }
-  
-    /* Botão de fechar a sidebar */
-    .close-toggle {
-      display: none;
-    }
+
+  .menu-toggle {
+    display: block;
   }
-  
-  /* DESKTOP: sidebar oculta por padrão, aparece ao clicar */
-  @media (min-width: 769px) {
-    .sidebar {
-      transform: translateX(-100%);
-    }
-  
-    .sidebar.active {
-      transform: translateX(0);
-    }
-  
-    .menu-toggle {
-      display: block;
-    }
-  
-    .content {
-      margin-left: 0;
-    }
+
+  .content {
+    margin-left: 0;
   }
+}
