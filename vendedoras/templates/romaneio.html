@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,21 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/romaneio.css' %}" />
   </head>
   <body>
-    <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle">☰ Menu</button>
-
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <button class="close-toggle" onclick="toggleSidebar()">✖</button>
-      <a href="{% url 'produto_list' %}"><button> Maleta </button></a>
-      <a href="{% url 'new_cadastro' %}"><button> Cadastro </button></a>
-      <a href="#"><button> Admin </button></a>
-    </aside>
-
+    
     <h1>Consultoras</h1>
-
+    
     {% for lote in maleta %}
-      <div id="titulo">
-        <h2>{{ lote.nome }} - ({{ lote.data_criacao }})</h2>
+    <div id="titulo">
+      <h2>{{ lote.nome }} - ({{ lote.data_criacao }})</h2>
         <p id="rep">Representante: {{ lote.consultora.nome }}</p>
         <p>
           <strong>Valor total:</strong> R$ {{ lote.valor_total }}
@@ -66,17 +59,17 @@
 
       {% comment %} <input type="hidden" name="maleta_id" value="{{ maleta.id }}" /> {% endcomment %}
     {% empty %}
-      <p>Nenhum lote cadastrado.</p>
+    <p>Nenhum lote cadastrado.</p>
     {% endfor %}
 
     <div class="paginacao">
       {% if maleta.has_previous %}
         <a href="?page=1">Primeiro</a>
         <a href="?page={{ maleta.previous_page_number }}">Anterior</a>
-      {% endif %}
+        {% endif %}
 
       <span>Página {{ maleta.number }} de {{ maleta.paginator.num_pages }}</span>
-
+      
       {% if maleta.has_next %}
         <a href="?page={{ maleta.next_page_number }}">Próxima</a>
         <a href="?page={{ maleta.paginator.num_pages }}">Última</a>
@@ -85,3 +78,4 @@
     <script src="{% static 'Js/home.js' %}"></script>
   </body>
 </html>
+{% endblock  %}
