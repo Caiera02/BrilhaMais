@@ -12,11 +12,11 @@
     <body>
       
       <div class="container">
-        <h1>Bem-vindo à Loja de Semijoias</h1>
+        <h1>Bem-vindo à BrilhaMais Semijoias</h1>
             <div class="buttons">
-                <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
-                <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
-                <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
+                <a href="{% url 'produto_list' %}"><button>Maleta</button></a>
+                <a href="{% url 'new_cadastro' %}"><button>Cadastro</button></a>
+                <a href="{% url 'admin:index' %}"><button>Admin</button></a>
             </div>
       </div>
 

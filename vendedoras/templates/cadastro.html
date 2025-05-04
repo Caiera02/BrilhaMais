@@ -53,10 +53,10 @@
           <input type="text" name="cep" id="cep" onchange="BuscaCep()" value="{{ new_form.cep.value|default_if_none:'' }}" placeholder="Digite o CEP" />
 
           <label for="rua">Rua</label>
-          <input type="text" name="rua" id="logradouro" value="{{ new_form.rua.value|default_if_none:'' }}" readonly />
+          <input type="text" name="rua" id="logradouro" value="{{ new_form.rua.value|default_if_none:'' }}" />
 
           <label for="bairro">Bairro</label>
-          <input type="text" name="bairro" id="bairro" value="{{ new_form.bairro.value|default_if_none:'' }}" readonly />
+          <input type="text" name="bairro" id="bairro" value="{{ new_form.bairro.value|default_if_none:'' }}"  />
 
           <label for="numero">Número</label>
           {{ new_form.numero }}
