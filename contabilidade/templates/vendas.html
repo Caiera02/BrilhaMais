@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align: center;">
+
+    <h2>Resumo de Vendas por Maleta</h2>
+
+    {% for grupo in dados %}
+      <div style="margin-bottom: 30px;">
+        <h3>Maleta: {{ grupo.maleta.nome }}</h3>
+        <table border="1" cellpadding="5">
+          <tr>
+            <th>Produto</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+          </tr>
+          {% for venda in grupo.vendas %}
+          <tr>
+            {% for vendas in vendas  %}
+            <td> {{vendas.maleta}}  </td>
+            {% endfor %}
+            <td>{{ venda.produto }}</td>
+            <td>{{ venda.produto.tipo }}</td>
+            <td>R$ {{ venda.valor }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="3">Nenhuma venda</td></tr>
+          {% endfor %}
+        </table>
+        <strong>Total: R$ {{ grupo.total }}</strong>
+      </div>
+    {% endfor %}
+    
+
+</body>
+</html>

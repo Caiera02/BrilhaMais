@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.db.models import Sum
 from vendedoras.models import Maleta, Produto
 from contabilidade.models import Venda
 
@@ -24,4 +25,19 @@ def salvar_vendas(request):
     # se não for POST (por exemplo, GET), redireciona ou mostra página de erro
     messages.warning(request, 'Acesso inválido.')
     return redirect('vendas_list')  # ou redireciona para uma página segura
-    
+
+def vendas_view(request):
+    maletas = Maleta.objects.all()
+    venda = Venda.objects.all()
+
+    dados = []
+    for maleta in maletas:
+        vendais = Venda.objects.filter(maleta=maleta).select_related('produto')
+        total = vendais.aggregate(total=Sum('valor'))['total'] or 0
+        dados.append({
+            'maleta': maleta,
+            'vendas': dados,
+            'total': total
+        })
+
+    return render(request, 'vendas.html', {'dados': dados , 'vendas':venda})
