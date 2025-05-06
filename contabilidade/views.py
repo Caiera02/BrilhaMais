@@ -65,3 +65,6 @@ def vendas_view(request):
     
 
     return render(request, 'vendas.html', {'dados': dados , 'vendas':venda},)
+
+def dashboard_view(request):
+    return render (request, 'dashboard.html')
