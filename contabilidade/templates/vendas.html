@@ -1,40 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/vendas.css'%}">
     <title>Document</title>
 </head>
 <body style="text-align: center;">
 
-    <h2>Resumo de Vendas por Maleta</h2>
+    <h2>Resumo de Vendas</h2>
 
     {% for grupo in dados %}
       <div style="margin-bottom: 30px;">
         <h3>Maleta: {{ grupo.maleta.nome }}</h3>
+        <h2>Representante: {{grupo.maleta.consultora}}</h2>
         <table border="1" cellpadding="5">
+
           <tr>
             <th>Produto</th>
-            <th>Tipo</th>
+            {% comment %} <th>Tipo</th> {% endcomment %}
             <th>Valor</th>
+            <th>Data da Venda</th>
           </tr>
-          {% for venda in grupo.vendas %}
+          
+          {% for venda in grupo.vendas  %}
           <tr>
-            {% for vendas in vendas  %}
-            <td> {{vendas.maleta}}  </td>
-            {% endfor %}
-            <td>{{ venda.produto }}</td>
-            <td>{{ venda.produto.tipo }}</td>
-            <td>R$ {{ venda.valor }}</td>
+            <td data-label='Produto'> {{venda.produto.tipos.nome}}  </td>
+            <td data-label='Valor'> R$ {{ venda.valor }}</td>
+            <td data-label='Data da Venda'> {{venda.data_venda}}</td>
           </tr>
           {% empty %}
           <tr><td colspan="3">Nenhuma venda</td></tr>
           {% endfor %}
         </table>
-        <strong>Total: R$ {{ grupo.total }}</strong>
+        <strong>Total da Venda: R$ {{ grupo.total }}   </strong>
+        <strong>Comissão: R$ {{ grupo.comissaoVendedora }}</strong></p>
       </div>
     {% endfor %}
-    
+
+    <div class="paginacao">
+      {% if dados.has_previous %}
+        <a href="?page=1">Primeiro</a>
+        <a href="?page={{ dados.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+      <span>Página {{ dados.number }} de {{ dados.paginator.num_pages }}</span>
+      
+      {% if dados.has_next %}
+        <a href="?page={{ dados.next_page_number }}">Próxima</a>
+        <a href="?page={{ dados.paginator.num_pages }}">Última</a>
+      {% endif %}
+    </div>
 
 </body>
 </html>

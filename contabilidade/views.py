@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.db.models import Sum
+from decimal import Decimal
+from django.core.paginator import Paginator
 from vendedoras.models import Maleta, Produto
 from contabilidade.models import Venda
 
@@ -34,10 +36,32 @@ def vendas_view(request):
     for maleta in maletas:
         vendais = Venda.objects.filter(maleta=maleta).select_related('produto')
         total = vendais.aggregate(total=Sum('valor'))['total'] or 0
+        total_format = f'{total:,.2f}'.replace(',','.')
+        
+        if total >=1000:
+            porcentagem = Decimal('0.40')
+        elif total >=500:
+            porcentagem = Decimal('0.30')
+        elif total <=499:
+            porcentagem= Decimal('0.20')
+        else:
+            porcentagem = Decimal('0.00')#sem comissão
+        
+        comissaoVendedora = total * porcentagem
+        comissaoVendedora = f'R$ {comissaoVendedora:,.2f}'.replace(",", ".").replace(".", ".").replace("X", ".")
+        
         dados.append({
             'maleta': maleta,
-            'vendas': dados,
-            'total': total
+            'vendas': vendais,
+            'total': total_format,
+            'comissaoVendedora':comissaoVendedora,
+            'porcentagem': porcentagem
         })
+        # print(dados)
+      
+    paginator = Paginator(dados, 1)
+    page_number = request.GET.get('page')
+    dados = paginator.get_page(page_number)       
+    
 
-    return render(request, 'vendas.html', {'dados': dados , 'vendas':venda})
+    return render(request, 'vendas.html', {'dados': dados , 'vendas':venda},)

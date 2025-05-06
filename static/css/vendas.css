@@ -1,0 +1,101 @@
+/* Layout padrão para desktop */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+th {
+    background-color: #419881;
+    color: white;
+}
+
+td {
+    background-color: #fff;
+}
+
+/* Títulos e blocos */
+h2{
+    color: #419881;
+}
+
+div[style*="margin-bottom"] {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Paginação */
+.paginacao {
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+.paginacao a {
+    color: #419881;
+    text-decoration: none;
+    margin: 0 6px;
+}
+
+.paginacao a:hover {
+    text-decoration: underline;
+}
+
+/* ----------- MOBILE ------------ */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 95%;
+        border: none;
+    }
+
+    th{
+        display: none;
+    }
+   
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        background-color: #fff;
+        margin: 12px 0;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: relative;
+    }
+
+    tbody td {
+        padding: 8px 12px;
+        text-align: left;
+        border: none;
+        position: relative;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 4px;
+        color: #419881;
+    }
+
+    tbody td:last-child {
+        border-bottom: none;
+    }
+
+    strong{
+        display: flex;
+        margin-bottom: 2%;
+    }
+}
