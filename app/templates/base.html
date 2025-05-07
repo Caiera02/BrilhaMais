@@ -5,14 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <title>Semijoias</title>
   </head>
   <body>
 
-    {% if user.is_authenticated  %}
+    {% comment %} {% if user.is_authenticated  %}
     <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
     margin-left: 0px;
-    margin-top: 0px;
+    margin-top: 20px;
+    position: absolute;
     ">☰ Menu</button>
     
     <!-- Sidebar -->
@@ -22,7 +24,24 @@
       <a href="{% url 'produto_list' %}"><button style="color: #419881;">Maleta</button></a>
       <a href="{% url 'new_cadastro' %}"><button style="color: #419881;">Cadastro</button></a>
     </aside>
-      {% endif %}
+      {% endif %} {% endcomment %}
+
+      <main>
+        <div id="menu">
+          <a href="{% url 'home_list' %} "><button>Home</button></a>
+          <a href="{% url 'produto_list' %} "><button>Mostruario</button></a>
+          <a href="{% url 'visualizar_venda' %}"><button>Vendas</button></a>
+          <div class="dropdown">
+            <button class="dropbtn">Admin</button>
+            <div class="dropdown-content">
+              <a href="{% url "new_cadastro" %}">Nova Consultora</a>
+              <a href="{% url "registro" %}">Novo Usuario</a>
+            </div>
+          </div>
+          
+          {% comment %} <input type="button" value="Admin" /> {% endcomment %}
+        </div>
+      </main>
 
     <!-- Aqui entra o conteúdo do filho -->
     {% block content %}
