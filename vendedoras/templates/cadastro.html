@@ -20,9 +20,9 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
           <button class="close-toggle" onclick="toggleSidebar()">✖</button>
-          <a href="{% url 'produto_list' %}"><button onclick="handleClick('Maleta')">Maleta</button></a>
-          <a href="{% url 'new_cadastro' %}"><button onclick="handleClick('Cadastro')">Cadastro</button></a>
-          <a href="#"><button onclick="handleClick('Admin')">Admin</button></a>
+          <a href="{% url 'produto_list' %}"><button>Maleta</button></a>
+          <a href="{% url 'new_cadastro' %}"><button>Cadastro</button></a>
+          <a href="{% url "dashboard" %}"><button>Admin</button></a>
         </aside>
       {% endif %}
 
