@@ -4,46 +4,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo de Ternos</title>
+    <title>Dashboard</title>
     <link rel="icon" href="1.png" />
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+    
   </head>
 
   <body>
     <header>
-      <h1>Dashboard</h1>
+      <h1 style="text-align: center;">Dashboard</h1>
     </header>
 
     <main>
       <div id="menu">
-        <input type="button" value="Home" />
-        <input type="button" value="Mostruario" />
-        <input type="button" value="Contabilidade" />
-        <input type="button" value="Admin" />
+        <a href="{% url 'home_list' %} "><button>Home</button></a>
+        <a href="{% url 'produto_list' %} "><button>Mostruario</button></a>
+        <a href="{% url 'visualizar_venda' %}"><button>Vendas</button></a>
+        <div class="dropdown">
+          <button class="dropbtn">Admin</button>
+          <div class="dropdown-content">
+            <a href="{% url "new_cadastro" %}">Nova Consultora</a>
+            <a href="{% url "registro" %}">Novo Usuario</a>
+          </div>
+        </div>
+        
+        {% comment %} <input type="button" value="Admin" /> {% endcomment %}
       </div>
     </main>
 
     <div class="centro">
-
       <div class="box">
-        <div class="quadro-com-titulo">
-          <span class="titulo">Vendedoras</span>
-          <p>Conteúdo do quadro</p>
+        <div class="card">
+          <div class="card-title">Vendedoras</div>
+          <div class="card-content">{{ total }}</div>
         </div>
       </div>
 
       <div class="box">
-        Vendedoras <br /> <p>{ numero de vendedoras cadastrada}</p>
+        <div class="card">
+          <div class="card-title">Venda de {{ mes }}</div>
+          <div class="card-content">R$ {{ totalVenda }}</div>
+        </div>
       </div>
-      
 
-      <div class="box">Venda mensal</div>
+      <div class="box">
+        <div class="card">
+          <div class="card-title">Comissão de {{ mes }}</div>
+          <div class="card-content">R$ {{ comissao }}</div>
+        </div>
+      </div>
 
-      <div class="box">hellou</div>
+      <div class="box" style="display: none;">
+        <div class="card">
+          <div class="card-title">Não tenho ideia do que colocar</div>
+          <div class="card-content">{{ quantidadeVenda }}</div>
+        </div>
+      </div>
 
     </div>
-
-    
-
   </body>
 </html>

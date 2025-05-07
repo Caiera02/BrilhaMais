@@ -1,108 +1,156 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #f2f2f2, #e6e6e6);
+  /* background: linear-gradient(to righ, #f5f5f5, #e8f0ee); */
+  background: linear-gradient(to right, #d9f4d1, #b2e0d7);
   color: #333;
-  background-color: #73C773;
-  /* background-image: url(dash-bg-01.jpg); */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   background-attachment: fixed;
-  padding-left: 50px;
-  padding-right: 50px;
-
+  padding: 50px;
 }
-
 
 #menu {
-  /* background-color: white; */
-  max-width: 100%;
-  max-height: 100%;
-  padding: 30px;
   display: flex;
+  border-radius: 30px 30px 0 0;
   justify-content: space-evenly;
+  background-color: white;
+  flex-wrap: wrap;
+  padding: 30px 0;
 }
 
-input {
-  background-color: transparent;
-  background-color: antiquewhite;
-  padding: 20px;
-  font-size: 15px;
-  border-radius: 25px;
-  cursor: pointer;
+input,button {
+  background-color: white;
+  padding: 15px 25px;
+  font-size: 20px;
   border: none;
+  /* border-radius: 30px 30px 0 0; */
+  /* border: 1px solid #ccc; */
+  cursor: pointer;
+  transition: box-shadow 0.5s ease;
 }
 
-input:hover {
-  /* background-color: aqua; */
-  box-shadow: 2px 10px 5px #333;
+button:hover {
+  box-shadow: 0px 20px 16px rgba(65, 152, 129, 0.3);
 }
 
 .centro {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 0 auto;
-  border: 2px solid black;
-  display: flex;
-  padding: 30px;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 100px;
 }
 
-.box{
-  border: 1px solid black;
+.box {
+  flex: 1 1 30%;
+  max-width: 300px;
 }
 
-.quadro-com-titulo {
+.card {
+  width: 100%;
+  height: 180px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   position: relative;
-  border: 2px solid black;
-  padding: 30px 20px 20px 20px;
-  /* margin-top: 30px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  border-top: 06px solid #419881;
 }
 
-.titulo {
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
   position: absolute;
-  top: -15px;
-  left: 20px;
-  background: white; /* mesma cor do fundo */
-  padding: 0 10px;
-  font-weight: bold;
+  top: -18px;
+  background: white;
+  padding: 0 12px;
+  font-weight: 600;
+  font-size: 20px;
+  color: #419881;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card-content {
+  font-size: 48px;
+  font-weight: 600;
+  color: #222;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }
 
 @media (max-width: 768px) {
   body {
-    padding: 10px;
-    background-attachment: scroll;
+    padding: 20px;
   }
 
   #menu {
     flex-direction: column;
     align-items: center;
-    padding: 20px 10px;
   }
 
   .centro {
     flex-direction: column;
-    padding: 20px 10px;
+    align-items: center;
   }
-.box{
-margin-bottom:4%;
-padding:10%;
-border-color: black;
-}
+
+  .box {
+    width: 100%;
+    max-width: 90%;
+  }
+
   input {
     width: 100%;
     max-width: 300px;
   }
-
-h1{
-text-align:center;
-
-}
 }

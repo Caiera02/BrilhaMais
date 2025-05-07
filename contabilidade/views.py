@@ -3,8 +3,12 @@ from django.contrib import messages
 from django.db.models import Sum
 from decimal import Decimal
 from django.core.paginator import Paginator
-from vendedoras.models import Maleta, Produto
+from django.utils import timezone
+import locale
+from vendedoras.models import Maleta, Produto, Representantes
 from contabilidade.models import Venda
+
+locale.setlocale(locale.LC_TIME,'pt_BR.UTF-8')
 
 def salvar_vendas(request):
     if request.method == 'POST':
@@ -67,4 +71,22 @@ def vendas_view(request):
     return render(request, 'vendas.html', {'dados': dados , 'vendas':venda},)
 
 def dashboard_view(request):
-    return render (request, 'dashboard.html')
+    hoje =timezone.now()
+    mes = hoje.strftime('%B').capitalize()
+    
+    # Pega o queryset filtrado
+    VendaMes = Venda.objects.filter(
+        data_venda__year=hoje.year,
+        data_venda__month=hoje.month
+    )
+
+    # Conta a quantidade de vendas
+    quantidade_vendas = VendaMes.count()
+
+    # Soma os valores
+    soma_venda_mes = VendaMes.aggregate(soma=Sum('valor'))['soma'] or 0
+    comissao = soma_venda_mes * Decimal(0.15)
+    comissao_format = f'{comissao:,.2f}'.replace(',','.')
+    
+    totalVendedora= Representantes.objects.filter(ativo= True).count()
+    return render (request, 'dashboard.html',{'total':totalVendedora,'totalVenda':soma_venda_mes,'quantidaVenda':quantidade_vendas,'mes':mes, 'comissao':comissao_format})
