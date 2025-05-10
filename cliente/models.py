@@ -18,3 +18,6 @@ class Vendas (models.Model):
     n_pago = models.BooleanField(verbose_name='Pendente')
     data_compra = models.DateField(auto_now_add=True,verbose_name='Comprado em ')
     data_atualizacao = models.DateField(auto_now=True,verbose_name='Atulizado em ')
+
+    def __str__(self):
+        return str(f'Cliente: {self.nome}')

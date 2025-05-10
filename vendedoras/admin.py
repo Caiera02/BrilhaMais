@@ -56,6 +56,11 @@ class ProdutosAdmin(ImportExportModelAdmin):
     list_filter = [
         ('maleta__data_criacao', DateFieldListFilter),
     ]
+
+@admin.register(Produtos)
+class ProdutosAdmin(admin.ModelAdmin):
+    list_display = ['nome']
+
     
 
     

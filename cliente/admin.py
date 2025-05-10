@@ -16,7 +16,7 @@ class VendasAdmin(admin.ModelAdmin):
     # inlines = [ProdutoInline]
     list_display= ['nome','valor_formatado','pago','n_pago','data_compra_formatada','data_atualizacao',]
     list_filter = ['pago','n_pago']
-    exclude = ['nome',]
+    # exclude = ['nome',]
     
     def valor_formatado(self,obj):
         return f'R$ {obj.valor}'
