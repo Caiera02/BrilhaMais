@@ -14,7 +14,7 @@
       <div class="container">
         <h1>Bem-vindo à BrilhaMais Semijoias</h1>
             <div class="buttons">
-                <a href="{% url 'produto_list' %}"><button>Maleta</button></a>
+                <a href="{% url 'produto_list' %}"><button>Mostruario</button></a>
                 {% if user.is_superuser %}
                     <a href="{% url 'new_cadastro' %}"><button>Cadastro</button></a>
                 {% endif %}
