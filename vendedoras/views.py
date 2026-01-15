@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.core.paginator import Paginator
 from vendedoras.forms import RepresentantesModelForm
 from vendedoras.models import Maleta,Representantes
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 
 # @login_required(login_url='/admin/')
@@ -24,6 +25,10 @@ def cadastro_view(request):
 def representante_view(request):
     mostrar= Representantes.objects.all()
     return render( request,'consultoras.html',{"mostrar":mostrar})
+
+class ConsultoraDetailView(DetailView):
+    model = Representantes
+    template_name = "consultoras_detail.html"
 
 # def maleta_view(request):
 #     maletas=Maleta.objects.all()
