@@ -12,14 +12,18 @@ def cadastro_view(request):
         print(new_form.data)
         if new_form.is_valid():
             new_form.save()
-            return redirect('new_cadastro')
+            print('Salvo')
+            return redirect('home_list')
+        else:
+            # ESTE É O NOVO PRINT CRÍTICO PARA DEPURAR!
+            print("Erros de validação do formulário:", new_form.errors)
     else:
         new_form= RepresentantesModelForm()
-    return render( 
-    request,
-    'cadastro.html',
-    {'new_form': new_form}
-)
+    return render( request,'cadastro.html',{'new_form': new_form})
+
+def representante_view(request):
+    mostrar= Representantes.objects.all()
+    return render( request,'consultoras.html',{"mostrar":mostrar})
 
 # def maleta_view(request):
 #     maletas=Maleta.objects.all()

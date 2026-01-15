@@ -1,29 +1,141 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
 {% load static %}
-{% block content %}
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href=" {% static 'css/home.css' %} " />
-      <title>Document</title>
-    </head>
-    <body>
-      
-      <div class="container">
-        <h1>Bem-vindo à BrilhaMais Semijoias</h1>
-            <div class="buttons">
-                <a href="{% url 'produto_list' %}"><button>Mostruario</button></a>
-                {% if user.is_superuser %}
-                    <a href="{% url 'new_cadastro' %}"><button>Cadastro</button></a>
-                {% endif %}
-                <a href="{% url 'visualizar_venda' %}"><button>Vendas</button></a>
-                <a href="{% url 'dashboard' %}"><button>Dashboard</button></a>
-            </div>
-      </div>
 
-      <script src="{% static 'JS/home.js' %}"></script>
-    </body>
-  </html>
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kory Semijoias - Painel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #5bb09e;
+        --hover-color: #4a9182;
+        --dark-text: #2c3e50;
+        --glass-bg: rgba(255, 255, 255, 0.25);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      body {
+        background: linear-gradient(-45deg, #a8e6cf, #dcedc1, #5bb09e, #ffffff);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      
+      .container {
+        text-align: center;
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        max-width: 450px; /* Quadro mais reduzido */
+        width: 90%;
+        transition: transform 0.3s ease;
+      }
+      
+      .logo {
+        width: 130px; /* Logo um pouco menor para o quadro compacto */
+        margin-bottom: 15px;
+        filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+      }
+      
+      h1 {
+        color: var(--dark-text);
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+      }
+      
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Dois botões por linha */
+        gap: 15px;
+      }
+      
+      .btn {
+        background: var(--primary-color);
+        color: white;
+        padding: 14px 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(91, 176, 158, 0.2);
+      }
+      
+      .btn:hover {
+        transform: translateY(-3px);
+        background: var(--hover-color);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* Botão de Suporte com cor levemente diferente se desejar destaque */
+      .btn-support {
+        background: #2c3e50; /* Cinza escuro elegante */
+      }
+      
+      .btn-support:hover {
+        background: #1a252f;
+      }
+      
+      @media (max-width: 400px) {
+        .menu-grid {
+          grid-template-columns: 1fr; /* Em telas muito pequenas, uma coluna só */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src=" {% static 'IMG/kadore.png' %} " alt="Kory Semijoias" class="logo" />
+
+      <h1>Painel Administrativo</h1>
+
+      <div class="menu-grid">
+        <a href="{% url 'produto_list' %}" class="btn">Mostruário</a>
+        <a href="{% url 'new_cadastro' %}" class="btn">Novo Cadastro</a>
+        <a href="{% url 'consultora_list' %} " class="btn">Consultoras</a>
+        <a href="{% url 'visualizar_venda' %}" class="btn">Vendas</a>
+        <a href="{% url 'dashboard' %}" class="btn">Dashboard</a>
+        <a href="#" class="btn btn-support">Suporte</a>
+      </div>
+    </div>
+  </body>
+</html>
 {% endblock %}

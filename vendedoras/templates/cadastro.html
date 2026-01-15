@@ -31,41 +31,50 @@
         <h1>Cadastro Consultora</h1>
         <form method="post">
           {% csrf_token %}
+
           <label for="nome">Nome:</label>
-          {{ new_form.nome }}
+          {{new_form.nome}}
 
           <label for="rg">RG:</label>
-          {{ new_form.rg }}
+          {{new_form.rg}}
+
+          <label for="email">Email:</label>
+          {{new_form.email}}
 
           <label for="cpf">CPF:</label>
-          <input type="text" name="cpf" id="cpf" onchange="validarCPF()" value="{{ new_form.cpf.value|default_if_none:'' }}" placeholder="Digite o CPF" />
-          {% comment %} {{ new_form.cpf }} {% endcomment %}
+          {% comment %} <input type="text" name="cpf" id="cpf" onchange="validarCPF()" value="{{ new_form.cpf.value|default_if_none:'' }}" placeholder="Digite o CPF" /> {% endcomment %}
+          {{new_form.cpf}}
 
           <label for="telefone1">Telefone:</label>
-          {{ new_form.telefone }}
+          {{new_form.telefone}}
 
           <label for="telefone2">Telefone 2:</label>
-          {{ new_form.telefone_2 }}
+          {{new_form.telefone_2}}
 
           <label for="instagram1">Instagram:</label>
-          {{ new_form.instagram }}
+          {{new_form.instagram}}
 
           <label for="id_cep">CEP</label>
-          <input type="text" name="cep" id="cep" onchange="BuscaCep()" value="{{ new_form.cep.value|default_if_none:'' }}" placeholder="Digite o CEP" />
+          {{new_form.cep}}
+          {% comment %} <input type="text" name="cep" id="cep" onchange="BuscaCep()" value="{{ new_form.cep.value|default_if_none:'' }}" placeholder="Digite o CEP" /> {% endcomment %}
 
           <label for="rua">Rua</label>
-          <input type="text" name="rua" id="logradouro" value="{{ new_form.rua.value|default_if_none:'' }}" />
+          {{new_form.rua}}
+          {% comment %} <input type="text" name="rua" id="logradouro" value="{{ new_form.rua.value|default_if_none:'' }}" /> {% endcomment %}
 
           <label for="bairro">Bairro</label>
-          <input type="text" name="bairro" id="bairro" value="{{ new_form.bairro.value|default_if_none:'' }}"  />
+          {{new_form.bairro}}
+          {% comment %} <input type="text" name="bairro" id="bairro" value="{{ new_form.bairro.value|default_if_none:'' }}"  /> {% endcomment %}
 
           <label for="numero">Número</label>
-          {{ new_form.numero }}
+          {{new_form.numero}}
 
           <label for="cidade">Cidade</label>
-          <input type="text" name="cidade" id="localidade" value="{{ new_form.cidade.value|default_if_none:'' }}" />
+          {{new_form.cidade}}
+          {% comment %} <input type="text" name="cidade" id="localidade" value="{{ new_form.cidade.value|default_if_none:'' }}" /> {% endcomment %}
 
-          <button type="submit" onclick="Salvar()" value="Cadastrar">Cadastrar</button>
+          <input type="submit" value="Cadastrar">
+          {% comment %} <button type="submit" onclick="Salvar()" value="Cadastrar">Cadastrar</button> {% endcomment %}
         </form>
       </div>
       <script src="{% static 'Js/cadastro.js' %}"></script>

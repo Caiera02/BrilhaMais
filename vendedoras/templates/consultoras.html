@@ -1,0 +1,174 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kory Semijoias - Detalhes do Cadastro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        /* Ajustes específicos para a exibição de dados */
+        .container {
+            max-width: 700px; /* Um pouco mais largo para acomodar os dados */
+            text-align: left;
+        }
+        
+        .header-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .data-item {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #4a9182;
+            margin-bottom: 2px;
+        }
+
+        .value {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            word-break: break-all;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .active { background-color: #27ae60; }
+        .inactive { background-color: #e74c3c; }
+
+        .full-width { grid-column: span 2; }
+
+        .footer-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            .data-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-box">
+            <img src="{% static 'img/logo.png' %}" alt="Kory Semijoias" class="logo" style="width: 100px;">
+            <h1>Ficha do consultora</h1>
+        </div>
+
+        <div class="data-grid">
+
+            <div class="data-item full-width" style="text-align: center;">
+                <span class="label">Status do Cadastro</span>
+                {% if consultora.ativo %}
+                    <span class="status-badge active">ATIVO</span>
+                {% else %}
+                    <span class="status-badge inactive">INATIVO</span>
+                {% endif %}
+            </div>
+
+            {% for consultora in mostrar  %}
+                <div class="data-item full-width">
+                    <span class="label">Nome Completo</span>
+                    <span class="value">{{ consultora.nome }}</span>
+                </div>
+            
+            
+            <div class="data-item">
+                <span class="label">RG</span>
+                <span class="value">{{ consultora.rg|default:"12.345.678-9" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">CPF</span>
+                <span class="value">{{ consultora.cpf|default:"123.456.789-00" }}</span>
+            </div>
+
+            <div class="data-item full-width">
+                <span class="label">E-mail</span>
+                <span class="value">{{ consultora.email|default:"anapaula@exemplo.com" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Telefone 1</span>
+                <span class="value">{{ consultora.telefone|default:"(11) 98888-7777" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Telefone 2</span>
+                <span class="value">{{ consultora.telefone_2|default:"(11) 91111-2222" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Instagram</span>
+                <span class="value">{{ consultora.instagram|default:"@ana_semijoias" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Data de Criação</span>
+                <span class="value">{{ consultora.data_criacao|date:"d/m/Y"|default:"14/01/2026" }}</span>
+            </div>
+
+            <div class="data-item full-width">
+                <span class="label">Rua</span>
+                <span class="value">{{ consultora.rua|default:"Avenida Paulista, 1000" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">CEP</span>
+                <span class="value">{{ consultora.cep|default:"01310-100" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Número</span>
+                <span class="value">{{ consultora.numero|default:"Ap 42" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Cidade</span>
+                <span class="value">{{ consultora.cidade|default:"São Paulo" }}</span>
+            </div>
+
+            <div class="data-item">
+                <span class="label">Bairro</span>
+                <span class="value">{{ consultora.bairro|default:"Bela Vista" }}</span>
+            </div>
+
+        </div>
+    
+        <div class="footer-actions">
+            {% comment %} <a href="{% url 'consultar_cadastro' %}" class="btn" style="background: #2c3e50;">Voltar</a> {% endcomment %}
+            <a href="#" class="btn">Editar Dados</a>
+        </div>
+    </div>
+
+</body>
+</html>
+{% endblock %}
