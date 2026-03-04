@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Clientes | BrilhaMais{% endblock %}
+
+{% block header_title %}Gerenciamento de Clientes e Vendas{% endblock %}
+
+{% block content %}
+<div class="page-header"
+    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h2 class="page-title">Histórico de Clientes (Finais)</h2>
+    <div style="display: flex; gap: 10px;">
+        <a href="{% url 'cliente:cliente_create' %}" class="btn btn-secondary">
+            <i class="fas fa-user-plus"></i> Novo Cliente
+        </a>
+        <a href="{% url 'cliente:venda_create' %}" class="btn btn-primary">
+            <i class="fas fa-cart-plus"></i> Nova Venda
+        </a>
+    </div>
+</div>
+
+<div class="vendas-container">
+    {% for cliente in clientes %}
+    <div class="glass-card" style="margin-bottom: 30px;">
+
+        <!-- Card Header -->
+        <div
+            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 8px;">
+                    <i class="fas fa-user"></i> {{ cliente.nome }}
+                </h3>
+                <p style="color: var(--secondary-color); font-weight: 500; font-size: 0.9rem;">
+                    <i class="fas fa-phone"></i> {{ cliente.telefone }}
+                </p>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produto (Peça)</th>
+                        <th style="text-align: right;">Valor</th>
+                        <th style="text-align: center;">Status</th>
+                        <th>Data da Compra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venda in vendas %}
+                    {% if venda.nome == cliente %}
+                    <tr>
+                        <td data-label="Produto">{{ venda.produto.tipos.nome }}</td>
+                        <td data-label="Valor" style="text-align: right; color: var(--primary-dark); font-weight: 600;">
+                            R$ {{ venda.valor }}</td>
+                        <td data-label="Status" style="text-align: center;">
+                            {% if venda.pago %}
+                            <span class="badge"
+                                style="background-color: rgba(76, 175, 80, 0.1); color: #4CAF50; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Pago</span>
+                            {% elif venda.n_pago %}
+                            <span class="badge"
+                                style="background-color: rgba(255, 152, 0, 0.1); color: #FF9800; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Pendente</span>
+                            {% else %}
+                            <span class="badge"
+                                style="background-color: var(--border-color); color: var(--text-muted); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Desconhecido</span>
+                            {% endif %}
+                        </td>
+                        <td data-label="Data da Compra">{{ venda.data_compra|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% endif %}
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                            Sem registros gerais de vendas no banco.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    {% empty %}
+    <div class="glass-card" style="text-align: center; padding: 50px;">
+        <i class="fas fa-users-slash" style="font-size: 3.5rem; color: #ccc; margin-bottom: 20px;"></i>
+        <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Nenhum cliente cadastrado</h3>
+        <p style="color: var(--text-muted);">Clique em "Novo Cliente" para começar a registrar.</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

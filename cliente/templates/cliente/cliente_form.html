@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} | BrilhaMais{% endblock %}
+
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="page-header" style="margin-bottom: 30px;">
+    <a href="{% url 'cliente:cliente_list' %}" class="btn btn-outline"
+        style="margin-bottom: 15px; display: inline-block;">
+        <i class="fas fa-arrow-left"></i> Voltar para Lista
+    </a>
+    <h2 class="page-title">{{ title }}</h2>
+</div>
+
+<div class="glass-card" style="max-width: 600px; margin: 0 auto; padding: 40px !important;">
+    <form method="post" class="premium-form">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="{{ field.id_for_label }}" class="form-label"
+                style="font-weight: 600; color: var(--secondary-color);">
+                {{ field.label }}
+            </label>
+
+            {% if field.field.widget.input_type == 'checkbox' %}
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                <div style="transform: scale(1.5); margin-left: 5px; accent-color: var(--primary-color);">
+                    {{ field }}
+                </div>
+                <span style="color: var(--text-color); font-size: 0.95rem;">Sim</span>
+            </div>
+            {% else %}
+            {{ field }}
+            {% endif %}
+
+            {% if field.help_text %}
+            <small class="form-text"
+                style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px; display: block;">{{
+                field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <div style="color: #F44336; font-size: 0.85rem; margin-top: 5px;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <div style="margin-top: 30px;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1.1rem;">
+                <i class="fas fa-save"></i> Salvar
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

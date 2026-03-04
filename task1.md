@@ -1,0 +1,30 @@
+# Task: Improve All Templates
+
+## 1. Unified Design System & Base Layout
+- [x] Create [app/static/css/premium.css](file:///c:/Users/Caio/Documents/BrilhaMais/app/static/css/premium.css) with a premium Vanilla CSS design system (fonts, colors, components like glassmorphism cards, buttons, tables, forms).
+- [x] Refactor [app/templates/base.html](file:///c:/Users/Caio/Documents/BrilhaMais/app/templates/base.html) to use [premium.css](file:///c:/Users/Caio/Documents/BrilhaMais/app/static/css/premium.css), defining a modern sidebar and header.
+
+## 2. Refactor Auth Templates
+- [x] Create or update [accounts/templates/login.html](file:///c:/Users/Caio/Documents/BrilhaMais/accounts/templates/login.html) to use the new premium styling (removing duplicated html boilerplate).
+- [x] Create or update [accounts/templates/registro.html](file:///c:/Users/Caio/Documents/BrilhaMais/accounts/templates/registro.html) with matching premium style.
+
+## 3. Refactor App Templates (Properly Extend Base)
+- [x] Update [vendedoras/templates/home.html](file:///c:/Users/Caio/Documents/BrilhaMais/vendedoras/templates/home.html): Remove DOCTYPE, extend base, keep animated dashboard links.
+- [x] Update [contabilidade/templates/dashboard.html](file:///c:/Users/Caio/Documents/BrilhaMais/contabilidade/templates/dashboard.html): Remove duplicate menu/DOCTYPE, extend base, upgrade metric cards.
+- [x] Update [vendedoras/templates/consultoras.html](file:///c:/Users/Caio/Documents/BrilhaMais/vendedoras/templates/consultoras.html): Fix layout structure, extend base.
+- [x] Update [vendedoras/templates/consultoras_detail.html](file:///c:/Users/Caio/Documents/BrilhaMais/vendedoras/templates/consultoras_detail.html): Fix layout structure, extend base.
+- [x] Update [vendedoras/templates/cadastro.html](file:///c:/Users/Caio/Documents/BrilhaMais/vendedoras/templates/cadastro.html): Remove inline sidebar/menu, extend base, upgrade form UI.
+- [x] Update [contabilidade/templates/vendas.html](file:///c:/Users/Caio/Documents/BrilhaMais/contabilidade/templates/vendas.html): Fix layout structure, upgrade tables.
+- [x] Update [vendedoras/templates/romaneio.html](file:///c:/Users/Caio/Documents/BrilhaMais/vendedoras/templates/romaneio.html): Fix layout structure, upgrade tables.
+
+## 4. Verification
+- [x] Run the Django development server locally to verify structural integrity and view rendering.
+- [x] Test the responsiveness of the new dashboard and forms.
+
+## 5. Client & Sales Module (New Request)
+- [x] Create [cliente/urls.py](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/urls.py) and register it in [app/urls.py](file:///c:/Users/Caio/Documents/BrilhaMais/app/urls.py).
+- [x] Implement [ClienteListView](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/views.py#7-18) and [VendaClienteCreateView](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/views.py#30-40) inside [cliente/views.py](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/views.py).
+- [x] Create [cliente/forms.py](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/forms.py) (ModelForm for Cliente and Venda).
+- [x] Implement [cliente_list.html](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/templates/cliente/cliente_list.html) using the premium Vanilla CSS table styles.
+- [x] Implement [cliente_form.html](file:///c:/Users/Caio/Documents/BrilhaMais/cliente/templates/cliente/cliente_form.html) using the premium Vanilla CSS card/form styles.
+- [x] Update [base.html](file:///c:/Users/Caio/Documents/BrilhaMais/app/templates/base.html) Sidebar to include a link to the Clientes list.

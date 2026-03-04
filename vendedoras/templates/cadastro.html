@@ -1,84 +1,130 @@
-
+{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Cadastro de Consultora | BrilhaMais{% endblock %}
+
+{% block header_title %}Nova Consultora{% endblock %}
+
 {% block content %}
-  <!DOCTYPE html>
-  <html lang="pt-br">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Formulário</title>
-      <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    </head>
+<div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+  <div class="page-header" style="margin-bottom: 20px;">
+    <h2 class="page-title">Formulário de Cadastro</h2>
+  </div>
 
-    <body>
-      {% if user.is_authenticated  %}
-        <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
-        margin-left: 0px;
-        margin-top: 0px;
-        ">☰ Menu</button>
-        
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-          <button class="close-toggle" onclick="toggleSidebar()">✖</button>
-          <a href="{% url 'produto_list' %}"><button>Maleta</button></a>
-          <a href="{% url 'new_cadastro' %}"><button>Cadastro</button></a>
-          <a href="{% url "dashboard" %}"><button>Admin</button></a>
-        </aside>
-      {% endif %}
+  <form method="post" class="premium-form">
+    {% csrf_token %}
 
-      <div class="container">
-        <h1>Cadastro Consultora</h1>
-        <form method="post">
-          {% csrf_token %}
+    <div class="grid-cards"
+      style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 0;">
 
-          <label for="nome">Nome:</label>
-          {{new_form.nome}}
-
-          <label for="rg">RG:</label>
-          {{new_form.rg}}
-
-          <label for="email">Email:</label>
-          {{new_form.email}}
-
-          <label for="cpf">CPF:</label>
-          {% comment %} <input type="text" name="cpf" id="cpf" onchange="validarCPF()" value="{{ new_form.cpf.value|default_if_none:'' }}" placeholder="Digite o CPF" /> {% endcomment %}
-          {{new_form.cpf}}
-
-          <label for="telefone1">Telefone:</label>
-          {{new_form.telefone}}
-
-          <label for="telefone2">Telefone 2:</label>
-          {{new_form.telefone_2}}
-
-          <label for="instagram1">Instagram:</label>
-          {{new_form.instagram}}
-
-          <label for="id_cep">CEP</label>
-          {{new_form.cep}}
-          {% comment %} <input type="text" name="cep" id="cep" onchange="BuscaCep()" value="{{ new_form.cep.value|default_if_none:'' }}" placeholder="Digite o CEP" /> {% endcomment %}
-
-          <label for="rua">Rua</label>
-          {{new_form.rua}}
-          {% comment %} <input type="text" name="rua" id="logradouro" value="{{ new_form.rua.value|default_if_none:'' }}" /> {% endcomment %}
-
-          <label for="bairro">Bairro</label>
-          {{new_form.bairro}}
-          {% comment %} <input type="text" name="bairro" id="bairro" value="{{ new_form.bairro.value|default_if_none:'' }}"  /> {% endcomment %}
-
-          <label for="numero">Número</label>
-          {{new_form.numero}}
-
-          <label for="cidade">Cidade</label>
-          {{new_form.cidade}}
-          {% comment %} <input type="text" name="cidade" id="localidade" value="{{ new_form.cidade.value|default_if_none:'' }}" /> {% endcomment %}
-
-          <input type="submit" value="Cadastrar">
-          {% comment %} <button type="submit" onclick="Salvar()" value="Cadastrar">Cadastrar</button> {% endcomment %}
-        </form>
+      <!-- Informações Pessoais -->
+      <div style="grid-column: 1 / -1; margin-top: 10px;">
+        <h3
+          style="border-bottom: 2px solid var(--primary-light); padding-bottom: 5px; color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 15px;">
+          <i class="fas fa-user"></i> Informações Pessoais
+        </h3>
       </div>
-      <script src="{% static 'Js/cadastro.js' %}"></script>
-      <script src="{% static 'Js/home.js' %}"></script>
-    </body>
-  </html>
+
+      <div class="form-group" style="grid-column: 1 / -1;">
+        <label class="form-label" for="nome">Nome Completo</label>
+        {{ new_form.nome }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="cpf">CPF</label>
+        {{ new_form.cpf }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="rg">RG</label>
+        {{ new_form.rg }}
+      </div>
+
+      <!-- Contato -->
+      <div style="grid-column: 1 / -1; margin-top: 20px;">
+        <h3
+          style="border-bottom: 2px solid var(--primary-light); padding-bottom: 5px; color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 15px;">
+          <i class="fas fa-address-book"></i> Contato
+        </h3>
+      </div>
+
+      <div class="form-group" style="grid-column: 1 / -1;">
+        <label class="form-label" for="email">E-mail</label>
+        {{ new_form.email }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="telefone1">Telefone Principal</label>
+        {{ new_form.telefone }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="telefone2">Telefone Alternativo</label>
+        {{ new_form.telefone_2 }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="instagram1">Instagram</label>
+        {{ new_form.instagram }}
+      </div>
+
+      <!-- Endereço -->
+      <div style="grid-column: 1 / -1; margin-top: 20px;">
+        <h3
+          style="border-bottom: 2px solid var(--primary-light); padding-bottom: 5px; color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 15px;">
+          <i class="fas fa-map-marker-alt"></i> Endereço
+        </h3>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="id_cep">CEP</label>
+        {{ new_form.cep }}
+      </div>
+
+      <div class="form-group" style="grid-column: 1 / -1;">
+        <label class="form-label" for="rua">Logradouro (Rua, Av.)</label>
+        {{ new_form.rua }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="numero">Número / Complemento</label>
+        {{ new_form.numero }}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="bairro">Bairro</label>
+        {{ new_form.bairro }}
+      </div>
+
+      <div class="form-group" style="grid-column: 1 / -1;">
+        <label class="form-label" for="cidade">Cidade</label>
+        {{ new_form.cidade }}
+      </div>
+
+    </div>
+
+    <div style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 15px;">
+      <a href="{% url 'consultora_list' %}" class="btn btn-outline" style="padding: 12px 25px;">Cancelar</a>
+      <button type="submit" class="btn btn-primary" style="padding: 12px 25px;">
+        <i class="fas fa-save"></i> Salvar Cadastro
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'Js/cadastro.js' %}"></script>
+<!-- Adicionando classe premium aos inputs mapeados pelo form do Django -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const inputs = document.querySelectorAll('.premium-form input, .premium-form select, .premium-form textarea');
+    inputs.forEach(input => {
+      // Evita sobrepor se for hidden, checkbox ou radio
+      if (input.type !== 'hidden' && input.type !== 'checkbox' && input.type !== 'radio') {
+        input.classList.add('form-control');
+      }
+    });
+  });
+</script>
 {% endblock %}

@@ -1,171 +1,174 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Detalhes | {{ object.nome }} | BrilhaMais{% endblock %}
+
+{% block header_title %}Ficha da Consultora{% endblock %}
+
+{% block extra_head %}
+<style>
+    .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        gap: 20px;
+    }
+
+    .profile-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .profile-title h2 {
+        margin: 0;
+        color: var(--secondary-color);
+    }
+
+    .data-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .data-item {
+        background: rgba(255, 255, 255, 0.5);
+        padding: 15px;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .data-item.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .data-label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .data-value {
+        font-size: 1rem;
+        color: var(--text-on-light);
+        font-weight: 500;
+    }
+
+    .action-buttons {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kory Semijoias - Detalhes do Cadastro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <style>
-        /* Ajustes específicos para a exibição de dados */
-        .container {
-            max-width: 700px; /* Um pouco mais largo para acomodar os dados */
-            text-align: left;
-        }
-        
-        .header-box {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+<div class="glass-card">
 
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .data-item {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .label {
-            display: block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #4a9182;
-            margin-bottom: 2px;
-        }
-
-        .value {
-            font-size: 0.95rem;
-            color: #2c3e50;
-            word-break: break-all;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .active { background-color: #27ae60; }
-        .inactive { background-color: #e74c3c; }
-
-        .full-width { grid-column: span 2; }
-
-        .footer-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        @media (max-width: 600px) {
-            .data-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div class="header-box">
-            <img src="{% static 'img/logo.png' %}" alt="Kory Semijoias" class="logo" style="width: 100px;">
-            <h1>Ficha do object</h1>
+    <div class="profile-header">
+        <div class="profile-avatar">
+            {{ object.nome|slice:":1"|upper }}
         </div>
-
-        <div class="data-grid">
-            
-            <div class="data-item full-width" style="text-align: center;">
-                    <span class="label">Status do Cadastro</span>
-                    {% if object.ativo %}
-                        <span class="status-badge active">ATIVO</span>
-                    {% else %}
-                        <span class="status-badge inactive">INATIVO</span>
-                    {% endif %}
-                </div>
-
-                <div class="data-item full-width">
-                    <span class="label">Nome Completo</span>
-                    <span class="value">{{ object.nome}}</span>
-                </div>
-                
-                <div class="data-item">
-                    <span class="label">RG</span>
-                    <span class="value">{{ object.rg|default:"12.345.678-9" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">CPF</span>
-                    <span class="value">{{ object.cpf|default:"123.456.789-00" }}</span>
-                </div>
-
-                <div class="data-item full-width">
-                    <span class="label">E-mail</span>
-                    <span class="value">{{ object.email|default:"anapaula@exemplo.com" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Telefone 1</span>
-                    <span class="value">{{ object.telefone|default:"(11) 98888-7777" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Telefone 2</span>
-                    <span class="value">{{ object.telefone_2|default:"(11) 91111-2222" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Instagram</span>
-                    <span class="value">{{ object.instagram|default:"@ana_semijoias" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Data de Criação</span>
-                    <span class="value">{{ object.data_criacao|date:"d/m/Y"|default:"14/01/2026" }}</span>
-                </div>
-
-                <div class="data-item full-width">
-                    <span class="label">Rua</span>
-                    <span class="value">{{ object.rua|default:"Avenida Paulista, 1000" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">CEP</span>
-                    <span class="value">{{ object.cep|default:"01310-100" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Número</span>
-                    <span class="value">{{ object.numero|default:"Ap 42" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Cidade</span>
-                    <span class="value">{{ object.cidade|default:"São Paulo" }}</span>
-                </div>
-
-                <div class="data-item">
-                    <span class="label">Bairro</span>
-                    <span class="value">{{ object.bairro|default:"Bela Vista" }}</span>
-                </div>
-        </div>
-
-        <div class="footer-actions">
-            {% comment %} <a href="{% url 'consultar_cadastro' %}" class="btn" style="background: #2c3e50;">Voltar</a> {% endcomment %}
-            <a href="#" class="btn">Editar Dados</a>
+        <div class="profile-title">
+            <h2>{{ object.nome }}</h2>
+            <div>
+                {% if object.ativo %}
+                <span class="badge badge-success">Ativo</span>
+                {% else %}
+                <span class="badge badge-danger">Inativo</span>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-</body>
-</html>
+    <div class="data-grid">
+        <div class="data-item">
+            <span class="data-label"><i class="fas fa-id-card"></i> CPF</span>
+            <span class="data-value">{{ object.cpf|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label"><i class="fas fa-id-card-alt"></i> RG</span>
+            <span class="data-value">{{ object.rg|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item full-width">
+            <span class="data-label"><i class="fas fa-envelope"></i> E-mail</span>
+            <span class="data-value">{{ object.email|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label"><i class="fas fa-phone"></i> Telefone 1</span>
+            <span class="data-value">{{ object.telefone|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label"><i class="fas fa-phone-alt"></i> Telefone 2</span>
+            <span class="data-value">{{ object.telefone_2|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label"><i class="fab fa-instagram"></i> Instagram</span>
+            <span class="data-value">{{ object.instagram|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label"><i class="fas fa-calendar-alt"></i> Data de Criação</span>
+            <span class="data-value">{{ object.data_criacao|date:"d/m/Y"|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item full-width" style="margin-top: 20px;">
+            <h3
+                style="border-bottom: 2px solid var(--primary-light); padding-bottom: 5px; color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 15px;">
+                <i class="fas fa-map-marker-alt"></i> Endereço
+            </h3>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label">CEP</span>
+            <span class="data-value">{{ object.cep|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item full-width">
+            <span class="data-label">Rua</span>
+            <span class="data-value">{{ object.rua|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label">Número</span>
+            <span class="data-value">{{ object.numero|default:"S/N" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label">Bairro</span>
+            <span class="data-value">{{ object.bairro|default:"Não Informado" }}</span>
+        </div>
+
+        <div class="data-item">
+            <span class="data-label">Cidade</span>
+            <span class="data-value">{{ object.cidade|default:"Não Informado" }}</span>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{% url 'consultora_list' %}" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+        <a href="#" class="btn btn-primary">
+            <i class="fas fa-edit"></i> Editar Dados
+        </a>
+    </div>
+
+</div>
 {% endblock %}

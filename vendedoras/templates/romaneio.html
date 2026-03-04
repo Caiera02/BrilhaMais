@@ -1,81 +1,121 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Lista de Lotes</title>
-    <link rel="stylesheet" href="{% static 'css/romaneio.css' %}" />
-  </head>
-  <body>
-    
-    <h1>Consultoras</h1>
-    
-    {% for lote in maleta %}
-    <div id="titulo">
-      <h2>{{ lote.nome }} - ({{ lote.data_criacao }})</h2>
-        <p id="rep">Representante: {{ lote.consultora.nome }}</p>
-        <p>
-          <strong>Valor total:</strong> R$ {{ lote.valor_total }}
+
+{% block title %}Vendas Lote | BrilhaMais{% endblock %}
+
+{% block header_title %}Romaneio de Produtos{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2 class="page-title">Realizar Vendas Consultora</h2>
+</div>
+
+<div class="romaneio-container">
+  {% for lote in maleta %}
+  <div class="glass-card" style="margin-bottom: 30px;">
+
+    <!-- Card Header -->
+    <div
+      style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+      <div>
+        <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 8px;">
+          <i class="fas fa-box-open"></i> {{ lote.nome }}
+        </h3>
+        <p style="color: var(--secondary-color); font-weight: 500; font-size: 0.9rem; margin-bottom: 5px;">
+          <i class="fas fa-calendar-alt"></i> Criado em: {{ lote.data_criacao }}
         </p>
-        <p>
-          <strong>Comissão Consultora:</strong> R$ {{ lote.comissaoVendedora }}
+        <p style="color: var(--primary-color); font-weight: 600; font-size: 1.1rem;">
+          <i class="fas fa-user-tag"></i> Representante: {{ lote.consultora.nome }}
         </p>
       </div>
 
-      <form method="post" action="{% url 'vendas_list' %}">
-        {% csrf_token %}
+      <div
+        style="text-align: right; background: rgba(65, 152, 129, 0.1); padding: 15px 25px; border-radius: var(--border-radius-md); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+        <div style="font-size: 1.3rem; font-weight: 700; color: var(--secondary-color); margin-bottom: 5px;">
+          Valor Total: R$ {{ lote.valor_total }}
+        </div>
+        <div style="font-size: 1rem; color: #FF9800; font-weight: 600;">
+          <i class="fas fa-star" style="font-size: 0.8rem;"></i> Comissão: R$ {{ lote.comissaoVendedora }}
+        </div>
+      </div>
+    </div>
 
-        <!-- Campo oculto com ID da maleta -->
-        <input type="hidden" name="maleta_id" value="{{ lote.id }}" />
+    <!-- Formulário de Venda -->
+    <form method="post" action="{% url 'vendas_list' %}">
+      {% csrf_token %}
+      <input type="hidden" name="maleta_id" value="{{ lote.id }}" />
 
-        <table>
+      <div class="table-responsive" style="margin-bottom: 20px;">
+        <table class="table">
           <thead>
             <tr>
-              <th>Selecione</th>
+              <th style="width: 50px; text-align: center;">
+                <i class="fas fa-check-square"></i>
+              </th>
               <th>Produto</th>
-              <th class="valor">Valor</th>
+              <th style="text-align: right;">Valor</th>
             </tr>
           </thead>
           <tbody>
             {% for produto in lote.produtos.all %}
-              <tr>
-                <td>
-                  <input type="checkbox" name="produtos_selecionados" value="{{ produto.id }}" />
-                </td>
-                <td>{{ produto.tipos.nome }}</td>
-                <td class="valor">R$ {{ produto.valor }}</td>
-              </tr>
+            <tr>
+              <td style="text-align: center;">
+                <input type="checkbox" name="produtos_selecionados" value="{{ produto.id }}"
+                  style="transform: scale(1.3); accent-color: var(--primary-color);" />
+              </td>
+              <td data-label="Produto" style="font-weight: 500;">{{ produto.tipos.nome }}</td>
+              <td data-label="Valor" style="text-align: right; color: var(--primary-dark); font-weight: 600;">R$ {{
+                produto.valor }}</td>
+            </tr>
             {% empty %}
-              <tr>
-                <td colspan="2">Nenhum produto neste lote.</td>
-              </tr>
+            <tr>
+              <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                <i class="fas fa-box" style="font-size: 2rem; color: #ddd; margin-bottom: 10px; display: block;"></i>
+                Nenhum produto cadastrado neste lote.
+              </td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
-        <button style="display: flex; justify-self: center; padding: 15px;" type="submit">Venda</button>
-      </form>
+      </div>
 
-      {% comment %} <input type="hidden" name="maleta_id" value="{{ maleta.id }}" /> {% endcomment %}
-    {% empty %}
-    <p>Nenhum lote cadastrado.</p>
-    {% endfor %}
-
-    <div class="paginacao">
-      {% if maleta.has_previous %}
-        <a href="?page=1">Primeiro</a>
-        <a href="?page={{ maleta.previous_page_number }}">Anterior</a>
-        {% endif %}
-
-      <span>Página {{ maleta.number }} de {{ maleta.paginator.num_pages }}</span>
-      
-      {% if maleta.has_next %}
-        <a href="?page={{ maleta.next_page_number }}">Próxima</a>
-        <a href="?page={{ maleta.paginator.num_pages }}">Última</a>
+      {% if lote.produtos.all %}
+      <div style="display: flex; justify-content: flex-end;">
+        <button type="submit" class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;">
+          <i class="fas fa-shopping-cart"></i> Finalizar Venda
+        </button>
+      </div>
       {% endif %}
-    </div>
-    <script src="{% static 'Js/home.js' %}"></script>
-  </body>
-</html>
-{% endblock  %}
+    </form>
+  </div>
+  {% empty %}
+  <div class="glass-card" style="text-align: center; padding: 50px;">
+    <i class="fas fa-folder-open" style="font-size: 3.5rem; color: #ccc; margin-bottom: 20px;"></i>
+    <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Nenhum lote cadastrado</h3>
+    <p style="color: var(--text-muted);">Não há lotes disponíveis para exibição no momento.</p>
+  </div>
+  {% endfor %}
+
+  <!-- Paginação -->
+  {% if maleta.has_other_pages %}
+  <div style="display: flex; justify-content: center; margin-top: 30px; gap: 10px;">
+    {% if maleta.has_previous %}
+    <a href="?page=1" class="btn btn-outline" style="padding: 8px 12px;"><i class="fas fa-angle-double-left"></i></a>
+    <a href="?page={{ maleta.previous_page_number }}" class="btn btn-outline" style="padding: 8px 12px;"><i
+        class="fas fa-angle-left"></i> Anterior</a>
+    {% endif %}
+
+    <span class="btn btn-primary" style="pointer-events: none; padding: 8px 15px;">
+      Página {{ maleta.number }} de {{ maleta.paginator.num_pages }}
+    </span>
+
+    {% if maleta.has_next %}
+    <a href="?page={{ maleta.next_page_number }}" class="btn btn-outline" style="padding: 8px 12px;">Próxima <i
+        class="fas fa-angle-right"></i></a>
+    <a href="?page={{ maleta.paginator.num_pages }}" class="btn btn-outline" style="padding: 8px 12px;"><i
+        class="fas fa-angle-double-right"></i></a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

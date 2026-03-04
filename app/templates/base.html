@@ -1,57 +1,158 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-    <title>Semijoias</title>
-  </head>
-  <body>
 
-    {% comment %} {% if user.is_authenticated  %}
-    <button id="menu-toggle" onclick="toggleSidebar()" class="menu-toggle" style="
-    margin-left: 0px;
-    margin-top: 20px;
-    position: absolute;
-    ">☰ Menu</button>
-    
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <button class="close-toggle" onclick="toggleSidebar()">✖</button>
-      <a href="{% url 'dashboard'%}"><button style="color: #419881;">HOME</button></a>
-      <a href="{% url 'produto_list' %}"><button style="color: #419881;">Maleta</button></a>
-      <a href="{% url 'new_cadastro' %}"><button style="color: #419881;">Cadastro</button></a>
-    </aside>
-      {% endif %} {% endcomment %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>{% block title %}BrilhaMais | Semijoias{% endblock %}</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Premium Stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/premium.css' %}?v=2.0">
+  {% block extra_head %}{% endblock %}
+</head>
 
-      <main>
-        <div id="menu">
-          <a href="{% url 'home_list' %} "><button>Home</button></a>
-          <a href="{% url 'produto_list' %} "><button>Mostruario</button></a>
-          <a href="{% url 'visualizar_venda' %}"><button>Vendas</button></a>
-          <a href="{% url 'dashboard' %}"><button>Dashboard</button></a>
-          <div class="dropdown">
-            {% if user.is_superuser %}
-            
-            <button class="dropbtn">Admin</button>
-            <div class="dropdown-content">
-              <a href="{% url "new_cadastro" %}">Nova Consultora</a>
-              <a href="{% url "registro" %}">Novo Usuario</a>
-            </div>
-            {% endif %}
-          </div>
-          
-          {% comment %} <input type="button" value="Admin" /> {% endcomment %}
+<body>
+
+  <div class="layout-wrapper">
+
+    <!-- Sidebar Navigation -->
+    {% if user.is_authenticated %}
+    <aside class="app-sidebar" id="app-sidebar">
+      <button class="sidebar-close" id="sidebar-close" aria-label="Fechar Menu">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="sidebar-brand">
+        <!-- Uses Kadore logo as standard if '1.png' doesn't look as premium -->
+        <img src="{% static 'IMG/kadore.png' %}" alt="Logo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          style="max-height: 45px;" />
+        <h2 style="display:none;">BRILHAMAIS</h2>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-section-title">Menu Principal</h3>
+          <a href="{% url 'home_list' %}" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="{% url 'dashboard' %}" class="nav-link">
+            <i class="fas fa-chart-pie"></i> Dashboard
+          </a>
         </div>
-      </main>
 
-    <!-- Aqui entra o conteúdo do filho -->
-    {% block content %}
-    {% endblock %}
+        <div class="nav-section">
+          <h3 class="nav-section-title">Gerenciamento</h3>
+          <a href="{% url 'produto_list' %}" class="nav-link">
+            <i class="fas fa-ring"></i> Mostruário
+          </a>
+          <a href="{% url 'visualizar_venda' %}" class="nav-link">
+            <i class="fas fa-shopping-bag"></i> Vendas
+          </a>
+          <a href="{% url 'consultora_list' %}" class="nav-link">
+            <i class="fas fa-users"></i> Consultoras
+          </a>
+          <a href="{% url 'cliente:cliente_list' %}" class="nav-link">
+            <i class="fas fa-user-friends"></i> Clientes
+          </a>
+        </div>
 
-    <script src="{% static 'JS/home.js' %}"></script>
-  </body>
+        {% if user.is_superuser %}
+        <div class="nav-section">
+          <h3 class="nav-section-title">Administração</h3>
+          <a href="{% url 'new_cadastro' %}" class="nav-link">
+            <i class="fas fa-user-plus"></i> Add Consultora
+          </a>
+          <a href="{% url 'registro' %}" class="nav-link">
+            <i class="fas fa-user-shield"></i> Add Usuário
+          </a>
+          <a href="/admin/" class="nav-link">
+            <i class="fas fa-cogs"></i> Painel Admin
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </aside>
+    {% endif %}
+
+    <!-- Main Application Area -->
+    <main class="app-main {% if not user.is_authenticated %}sidebar-collapsed{% endif %}">
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="header-left">
+          {% if user.is_authenticated %}
+          <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Alternar Menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          {% endif %}
+          <h1 class="header-title">{% block header_title %}Painel de Controle{% endblock %}</h1>
+        </div>
+
+        <div class="header-right">
+          {% if user.is_authenticated %}
+          <!-- Forcer Logout logic via standard Django auth if available, keeping placeholder for now -->
+          <div class="user-profile">
+            <div class="user-info">
+              <span class="user-name">{{ user.username }}</span>
+              <span class="user-role">{% if user.is_superuser %}Admin{% else %}Operador{% endif %}</span>
+            </div>
+            <div class="user-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </header>
+
+      <!-- Dynamic Content Area -->
+      <div class="app-content">
+        {% block content %}
+        <!-- Block content goes here -->
+        {% endblock %}
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Layout Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebarClose = document.getElementById('sidebar-close');
+      const sidebar = document.getElementById('app-sidebar');
+
+      if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', function () {
+          // on mobile toggle 'open' class
+          if (window.innerWidth <= 992) {
+            sidebar.classList.toggle('open');
+          } else {
+            // on desktop toggle 'collapsed'
+            sidebar.classList.toggle('collapsed');
+            document.querySelector('.app-main').classList.toggle('sidebar-collapsed');
+          }
+        });
+      }
+
+      if (sidebarClose && sidebar) {
+        sidebarClose.addEventListener('click', function () {
+          sidebar.classList.remove('open');
+        });
+      }
+    });
+  </script>
+
+  <!-- Existing Scripts -->
+  {% block extra_js %}{% endblock %}
+</body>
+
 </html>
-
